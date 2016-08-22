@@ -23,4 +23,5 @@ public class DataLayer {
 	public List<StateAbbrvBean> getAllAbbr(){
 		return dao.getAllStatesAbb();
 	}
+	
 }

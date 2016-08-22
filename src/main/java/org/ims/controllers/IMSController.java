@@ -111,7 +111,7 @@ public class IMSController implements ServletContextAware,
 		clientList.add(newClient);
 		//testing
 		DataLayer dLayer = new DataLayer();
-		System.out.println(dLayer.test());
+		//System.out.println(dLayer.test());
 		for(StateAbbrvBean s:dLayer.getAllAbbr()){
 			System.out.println(s.getStateName());
 		}
