@@ -28,18 +28,37 @@
    		<h1>Create New Client</h1>
 				<form:form action="updateclient.do" method="post" commandName="myClient">
 			<!-- path=bean property -->
+					<table class="fullwidth">
+						<tr>
+							<td>
+								Name:<br/> <form:input path="name" /> <br/>
+								<form:errors path="name" cssClass="error" /><br/>
+							</td>
+							<td>
+								Email:<br/> <form:input path="email" /> <br/>
+								<form:errors path="email" cssClass="error" /><br/>
+							</td>
+						</tr>
+					</table>
+					<table class="fullwidth">
+						<tr>
+							<td>
+								Person of Contact:<br/> <form:input path="pocn" /> <br/>
+								<form:errors path="pocn" cssClass="error" /><br/>
+							</td>
+							<td>
+								Phone Number:<br/> <form:input path="phone" /> <br/>
+								<form:errors path="phone" cssClass="error" /><br/>
+							</td>
+							<td>
+								Fax Number:<br/> <form:input path="fax" /> <br/>
+								<form:errors path="fax" cssClass="error" /><br/>
+							</td>
+						</tr>
+					</table>
 				ClientId:<br/> <form:input path="id" /> <br/>
 					<form:errors path="id" cssClass="error" /><br/>
-				Name:<br/> <form:input path="name" /> <br/>
-					<form:errors path="name" cssClass="error" /><br/>
-				Email:<br/> <form:input path="email" /> <br/>
-					<form:errors path="email" cssClass="error" /><br/>
-				Person of Contact:<br/> <form:input path="pocn" /> <br/>
-					<form:errors path="pocn" cssClass="error" /><br/>
-				Phone Number:<br/> <form:input path="phone" /> <br/>
-					<form:errors path="phone" cssClass="error" /><br/>
-				Fax Number:<br/> <form:input path="fax" /> <br/>
-					<form:errors path="fax" cssClass="error" /><br/>
+				
 				<!-- Address:<br/> <form:input path="address" /><br/>
 					<form:errors path="address" cssClass="error" /><br/>
 				ClientType:<br/> <form:input path="clientType" /><br/>

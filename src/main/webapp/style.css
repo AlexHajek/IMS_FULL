@@ -65,3 +65,10 @@ li a:hover {
 .error{
 	color: red;
 }
+.inputfields{
+	border: 2px dashed blue;
+	border-radius: 4px;
+}
+.fullwidth{
+	width: 100%;
+}

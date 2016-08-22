@@ -28,24 +28,52 @@
    		<h1>Create New Product</h1>
 			<form:form action="registerProduct.do" method="post" commandName="newProduct">
 						<!-- path=bean property -->
-				Product UPC:<br/> <form:input path="productUPC" /> <br/>
-					<form:errors path="productUPC" cssClass="error" /><br/>
-				Product Name:<br/> <form:input path="productName" /> <br/>
-					<form:errors path="productName" cssClass="error" /><br/>
-				Product Description:<br/> <form:input path="productDescription" /> <br/>
-					<form:errors path="productDescription" cssClass="error" /><br/>
-				Short Name:<br/> <form:input path="shortName" /> <br/>
-					<form:errors path="shortName" cssClass="error" /><br/>
-				Unit Cost:<br/> <form:input path="unitCost" /> <br/>
-					<form:errors path="unitCost" cssClass="error" /><br/>
-				Pack Size:<br/> <form:input path="packSize" /> <br/>
-					<form:errors path="packSize" cssClass="error" /><br/>
-				Reorder Quantity:<br/> <form:input path="reorderQuantity" /> <br/>
-					<form:errors path="reorderQuantity" cssClass="error" /><br/>
-				Retail Price:<br/> <form:input path="retailPrice" /> <br/>
-					<form:errors path="retailPrice" cssClass="error" /><br/>
-				Product Weight:<br/> <form:input path="productWeight" /> <br/>
-					<form:errors path="productWeight" cssClass="error" /><br/>
+						<table class="fullwidth">
+							<tr>
+								<td>
+									Product UPC:<br/> <form:input path="productUPC" cssClass="inputfields"/> <br/>
+									<form:errors path="productUPC" cssClass="error" /><br/>
+								</td>
+								<td>
+									Product Name:<br/> <form:input path="productName" cssClass="inputfields"/> <br/>
+									<form:errors path="productName" cssClass="error" /><br/>
+								</td>
+								<td>
+									Short Name:<br/> <form:input path="shortName" cssClass="inputfields"/> <br/>
+									<form:errors path="shortName" cssClass="error" /><br/>
+								</td>
+								<td>
+									Pack Size:<br/> <form:input path="packSize" cssClass="inputfields"/> <br/>
+									<form:errors path="packSize" cssClass="error" /><br/>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									Unit Cost:<br/> <form:input path="unitCost" cssClass="inputfields"/> <br/>
+									<form:errors path="unitCost" cssClass="error" /><br/>
+								</td>
+								<td>
+									Reorder Quantity:<br/> <form:input path="reorderQuantity" cssClass="inputfields"/> <br/>
+									<form:errors path="reorderQuantity" cssClass="error" /><br/>
+								</td>
+								<td>
+									Retail Price:<br/> <form:input path="retailPrice" cssClass="inputfields"/> <br/>
+									<form:errors path="retailPrice" cssClass="error" /><br/>
+								</td>
+								<td>
+									Product Weight:<br/> <form:input path="productWeight" cssClass="inputfields"/> <br/>
+									<form:errors path="productWeight" cssClass="error" /><br/>
+								</td>
+							</tr>
+						</table>
+						<table class="fullwidth">
+							<tr >
+								<td>
+									Product Description:<br/> <form:input path="productDescription" cssClass="inputfields fullwidth"/> <br/>
+									<form:errors path="productDescription" cssClass="error" /><br/>
+								</td>
+							</tr>
+						</table>
 <%-- 				ProductImage:<br/> <form:input path="productImage" /> <br/> --%>
 <%-- 					<form:errors path="productImage" cssClass="error" /><br/> --%>
 				<input type="submit" value="Register" />
