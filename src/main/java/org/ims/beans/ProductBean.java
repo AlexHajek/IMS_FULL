@@ -57,7 +57,7 @@ public class ProductBean {
 	private double retailPrice;
 	@Column(name="PRODUCT_WEIGHT")
 	@Min(value=0,message="Invalid Weight")
-	private int productWeight;
+	private double productWeight;
 	@Column(name="PRODUCT_IMAGE")
 	private Blob productImage;
 	@ManyToMany
@@ -118,10 +118,10 @@ public class ProductBean {
 	public void setRetailPrice(double retailPrice) {
 		this.retailPrice = retailPrice;
 	}
-	public int getProductWeight() {
+	public double getProductWeight() {
 		return productWeight;
 	}
-	public void setProductWeight(int productWeight) {
+	public void setProductWeight(double productWeight) {
 		this.productWeight = productWeight;
 	}
 	public Blob getProductImage() {
@@ -149,7 +149,7 @@ public class ProductBean {
 		// TODO Auto-generated constructor stub
 	}
 	public ProductBean(int productUPC, String productName, String productDescription, String shortName, double unitCost,
-			String packSize, int reorderQuantity, int retailPrice, int productWeight, Blob productImage,
+			String packSize, int reorderQuantity, double retailPrice, double productWeight, Blob productImage,
 			Set<ProductCategoryBean> categoriesForProduct, Set<POLineBean> linesForProduct) {
 		super();
 		this.productUPC = productUPC;
