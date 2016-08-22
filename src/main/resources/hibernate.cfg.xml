@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration SYSTEM 
+"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+		<!-- Configuration -->
+		<property name="hibernate.connection.driver_class">
+			oracle.jdbc.OracleDriver
+		</property>
+		<property name="hibernate.connection.url">
+			jdbc:oracle:thin:@localhost:1521:xe
+		</property>
+		<property name="hibernate.connection.username">
+			demo
+		</property>
+		<property name="hibernate.connection.password">
+			demo
+		</property>
+		<property name="hibernate.connection.pool_size">
+			20
+		</property>
+		<property name="hibernate.dialect">
+			org.hibernate.dialect.Oracle10gDialect
+		</property>
+		<property name="hibernate.hbm2ddl.auto">
+			update
+		</property>
+		<property name="show_sql">
+			true
+		</property>
+		<property name="javax.persistence.validation.mode">none</property>
+		<!-- ORM resources -->
+		<mapping class="org.ims.beans.AddressBean"/>
+		<mapping class="org.ims.beans.ClientBean"/>
+		<mapping class="org.ims.beans.ClientTypeBean"/>
+		<mapping class="org.ims.beans.POLineBean"/>
+		<mapping class="org.ims.beans.POLineComposite"/>
+		<mapping class="org.ims.beans.ProductBean"/>
+		<mapping class="org.ims.beans.ProductCategoryBean"/>
+		<mapping class="org.ims.beans.PurchaseOrderBean"/>
+		<mapping class="org.ims.beans.StateAbbrvBean"/>
+	</session-factory>
+</hibernate-configuration>

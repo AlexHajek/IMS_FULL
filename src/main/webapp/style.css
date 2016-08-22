@@ -1,0 +1,67 @@
+@CHARSET "ISO-8859-1";
+html,body{
+	margin: 0;
+  padding: 0;
+  background-image: url("backg2.jpg");
+}
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    min-width: 10%;
+}
+
+li a {
+    display: block;
+    color: yellow;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+
+li a:hover {
+    background-color: #555;
+    color: white;
+}
+.navbar{
+	float:left;
+	width: 10%;
+	min-height: 100vh;
+	margin: 0;
+  padding: 0;
+	background: blue; /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient(left,blue,transparent); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(left,blue,transparent); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(left,blue,transparent); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(left,blue,transparent); /* Standard syntax */
+}
+.pagebody{
+	float:right;
+	width: 90%;
+	min-height: 100vh;
+	height: auto;
+	margin: 0;
+  padding: 0;
+}
+.pagecenter{
+	margin: 0 auto;
+	text-align: center;
+	width: 75%;
+	color: yellow;
+  background: #f1f1f1; /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient(left,transparent,blue,transparent); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(left,transparent,blue,transparent); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(left,transparent,blue,transparent); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(left,transparent,blue,transparent); /* Standard syntax */
+}
+.cleardiv{
+	clear: both;
+}
+.fulldiv{
+	min-height: 100%;
+	width: 100%;
+	margin: 0;
+  padding: 0;
+}
+.error{
+	color: red;
+}
