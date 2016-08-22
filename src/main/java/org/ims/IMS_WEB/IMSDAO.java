@@ -19,7 +19,9 @@ public class IMSDAO {
 	}
 	
 	public void create(Object obj){
+		System.out.println("Creating "+obj);
 		session.save(obj);
+		System.out.println("Done Creating");
 	}
 	public Object retrieve(Object obj){
 		Object returnObj;
