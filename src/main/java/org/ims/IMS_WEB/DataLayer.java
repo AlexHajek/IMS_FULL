@@ -3,6 +3,7 @@ package org.ims.IMS_WEB;
 import java.util.List;
 
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.ims.beans.StateAbbrvBean;
 
 public class DataLayer {
@@ -24,4 +25,9 @@ public class DataLayer {
 		return dao.getAllStatesAbb();
 	}
 	
+	public void create(Object obj){
+		Transaction tran = session.beginTransaction();
+		dao.create(obj);
+		tran.commit();
+	}
 }

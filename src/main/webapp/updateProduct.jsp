@@ -43,7 +43,7 @@
 									<form:errors path="shortName" cssClass="error" /><br/>
 								</td>
 								<td>
-									Pack Size:<br/> <form:input path="packSize" cssClass="inputfields"/> <br/>
+									Pack Size:<br/> <form:input path="packSize" cssClass="inputfields" /> <br/>
 									<form:errors path="packSize" cssClass="error" /><br/>
 								</td>
 							</tr>

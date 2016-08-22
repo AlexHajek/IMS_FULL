@@ -14,6 +14,7 @@ import org.ims.beans.ClientBean;
 import org.ims.beans.ClientTypeBean;
 import org.ims.beans.ProductBean;
 import org.ims.beans.StateAbbrvBean;
+import org.ims.middle.MiddleInterfaceF;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,17 +33,6 @@ public class IMSController implements ServletContextAware,
 	@RequestMapping(value="updateProduct.do", method=RequestMethod.GET)
 	public String updateProduct(HttpServletRequest req){
 		req.setAttribute("newProduct", new ProductBean());
-//		Session session = SessionFactoryManager.getInstance().openSession();
-//		session.close();
-//		IMSDAO dao =new IMSDAO(SessionFactoryManager.getInstance().openSession());
-//		List<StateAbbrvBean> list = dao.getAllStatesAbb();
-//		for(StateAbbrvBean s: list){
-//			System.out.println(s.getStateName());
-//		}
-//		MiddleInterfaceF midF =new MiddleInterfaceF();
-//		for(StateAbbrv s:midF.printStateAbb()){
-//			System.out.println(s.getStateName());
-//		}
 		return "updateProduct";
 	}
 	@RequestMapping(value="updateClientList.do", method=RequestMethod.GET)
@@ -56,16 +46,10 @@ public class IMSController implements ServletContextAware,
 			HttpServletRequest req,
 			HttpServletResponse resp){
 		if(bindingResult.hasErrors()){
-			System.out.println("Error");
 			return new ModelAndView("updateProduct");
 		}
-		System.out.println("!Error");
-		DataLayer dLayer = new DataLayer();
-		System.out.println(dLayer.test());
-		for(StateAbbrvBean s:dLayer.getAllAbbr()){
-			System.out.println(s.getStateName());
-		}
-		dLayer.close();
+		MiddleInterfaceF midF = new MiddleInterfaceF();
+		midF.insertProduct(newProduct);
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("index");
 		return mv;
