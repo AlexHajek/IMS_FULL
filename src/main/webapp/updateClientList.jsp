@@ -57,9 +57,29 @@
 							</td>
 						</tr>
 					</table>
-				ClientId:<br/> <form:input path="id" /> <br/>
-					<form:errors path="id" cssClass="error" /><br/>
-				
+				<!-- ClientId:<br/> <form:input path="id" /> 
+					<form:errors path="id" cssClass="error" />	 -->
+				<!--AddressId:<br/> <form:input path="address.addressId" /> 
+					<form:errors path="address.addressId" cssClass="error" />-->
+				StreetAddress1:<br/> <form:input path="address.streetAddress1" /> <br/>
+					<form:errors path="address.streetAddress1" cssClass="error" />
+				StreetAddress2:<br/> <form:input path="address.streetAddress2" /> <br/>
+					<form:errors path="address.streetAddress2" cssClass="error" />
+				City:<br/> <form:input path="address.addressCity" /> <br/>
+					<form:errors path="address.addressCity" cssClass="error" />
+				ZIP Code:<br/> <form:input path="address.addressZip" /> <br/>
+					<form:errors path="address.addressZip" cssClass="error" />
+				StateName:<br/> <form:select path="address.stateAbbrv.arrvId">
+									<form:options items="${myAbbrvs}" itemValue="arrvId" itemLabel="stateName"/>
+								</form:select> <br/>
+					<form:errors path="address.stateAbbrv.arrvId" cssClass="error" />
+					
+				ClientType:<br/> <form:select path="clientType.clientTypeId">
+									<form:options items="${clientTypes}" itemValue="clientTypeId" itemLabel="clientType"/>
+								</form:select><br/>
+					<form:errors path="clientType.clientTypeId" cssClass="error" />
+				<!--  ClientTypeID:<br/> <form:input path="clientType.clientTypeId" /> <br/>
+					<form:errors path="clientType.clientTypeId" cssClass="error" />  -->
 				<!-- Address:<br/> <form:input path="address" /><br/>
 					<form:errors path="address" cssClass="error" /><br/>
 				ClientType:<br/> <form:input path="clientType" /><br/>

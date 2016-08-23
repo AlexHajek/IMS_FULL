@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.ims.IMS_WEB.DataLayer;
+import org.ims.beans.ClientTypeBean;
 import org.ims.beans.ProductBean;
 import org.ims.beans.ProductCategoryBean;
 import org.ims.beans.StateAbbrvBean;
@@ -49,6 +50,19 @@ public class MiddleInterfaceF {
 		category.setProductsForCategory(null);
 		dLayer.create(category);
 		return true;
+	}
+	public boolean insertObject(Object obj){
+		dLayer.create(obj);
+		return true;
+	}
+	public List<StateAbbrvBean> getAbbrvBeans(){
+		return dLayer.getAllAbbr();
+	}
+	public List<ClientTypeBean> getClientTypes(){
+		return dLayer.getAllClientTypes();
+	}
+	public DataLayer getDataLayer(){
+		return this.dLayer;
 	}
 	@Override
 	protected void finalize() throws Throwable {

@@ -9,8 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
-import org.ims.IMS_WEB.DataLayer;
-import org.ims.beans.AddressBean;
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 import org.ims.beans.ClientBean;
 import org.ims.beans.ClientTypeBean;
 import org.ims.beans.ProductBean;
@@ -47,7 +48,12 @@ public class IMSController implements ServletContextAware,
 	}
 	@RequestMapping(value="updateClientList.do", method=RequestMethod.GET)
 	public String updateClientList(HttpServletRequest req){
+		MiddleInterfaceF mid = new MiddleInterfaceF();
 		req.setAttribute("myClient", new ClientBean());
+		List<StateAbbrvBean> abbrvList = mid.getAbbrvBeans();
+		List<ClientTypeBean> typeList = mid.getClientTypes();
+		req.setAttribute("myAbbrvs", abbrvList);
+		req.setAttribute("clientTypes", typeList);
 		return "updateClientList";
 	}
 	@RequestMapping(value="updateProductCats.do", method=RequestMethod.GET)
@@ -118,44 +124,25 @@ public class IMSController implements ServletContextAware,
 		}
 		@SuppressWarnings("unchecked")
 		Vector<ClientBean> clientList = (Vector<ClientBean>)this.servletContext.getAttribute("clientList");
-		/*
-		StateAbbrv clientStateAbbrv = new StateAbbrv(Integer.parseInt(req.getParameter("stateAbbrvId")),
-													req.getParameter("stateName"),
-													req.getParameter("stateAbbrv"),
-													null);
-		Address clientAddress = new Address(Integer.parseInt(req.getParameter("addressId")),
-											req.getParameter("streetAddress1"),
-											req.getParameter("streetAddress2"),
-											req.getParameter("addressCity"),
-											req.getParameter("addressZip"),
-											clientStateAbbrv);
-		ClientType newClientType = new ClientType(Integer.parseInt(req.getParameter("clientTypeId")),
-													req.getParameter("clientType"),
-													null);
-													*/
+		
 		System.out.println(req.getParameter("id"));
 		System.out.println(req.getParameter("name"));
-		ClientBean newClient = new ClientBean(Integer.parseInt(req.getParameter("id")),
-										req.getParameter("name"),
-										req.getParameter("email"),
-										req.getParameter("pocn"),
-										req.getParameter("phone"),
-										req.getParameter("fax"),
-										new AddressBean()/*clientAddress,*/,
-										new ClientTypeBean()/*newClientType*/);			
-		clientList.add(newClient);
-		//testing
-		DataLayer dLayer = new DataLayer();
-		System.out.println(dLayer.test());
-		for(StateAbbrvBean s:dLayer.getAllAbbr()){
-			System.out.println(s.getStateName());
-		}
-		dLayer.close();
-//		Session session = SessionFactoryManager.getInstance().openSession();
-//		IMSDAO myDAO = new IMSDAO(session);
-//		myDAO.create(newClient);
-//		session.close();
 		
+		MiddleInterfaceF midF = new MiddleInterfaceF();
+		Session session = midF.getDataLayer().getSession();
+		
+		Criteria criteria = session.createCriteria(StateAbbrvBean.class)
+				.add(Restrictions.eq("arrvId", myClient.getAddress().getStateAbbrv().getArrvId()));
+		Criteria criteria2 = session.createCriteria(ClientTypeBean.class)
+				.add(Restrictions.eq("clientTypeId", myClient.getClientType().getClientTypeId()));
+		StateAbbrvBean myBean = (StateAbbrvBean)criteria.uniqueResult();
+		ClientTypeBean myBean2 = (ClientTypeBean)criteria2.uniqueResult();
+		
+		myClient.getAddress().setStateAbbrv(myBean);
+		myClient.setClientType(myBean2);
+		
+		midF.insertObject(myClient.getAddress());
+		midF.insertObject(myClient);
 		req.getSession().setAttribute("clientList", clientList);
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("viewClients"); 	//viewClients.jsp

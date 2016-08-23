@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.ims.beans.ClientTypeBean;
 import org.ims.beans.ProductBean;
 import org.ims.beans.ProductCategoryBean;
 import org.ims.beans.StateAbbrvBean;
@@ -27,6 +28,10 @@ public class DataLayer {
 		return dao.getAllStatesAbb();
 	}
 	
+	public List<ClientTypeBean> getAllClientTypes(){
+		return dao.getAllClientTypes();
+	} 
+	
 	public List<ProductBean> getAllProducts(){
 		return dao.getAllProducts();
 	}
@@ -45,5 +50,8 @@ public class DataLayer {
 		Transaction tran = session.beginTransaction();
 		dao.update(obj);
 		tran.commit();
+	}
+	public Session getSession(){
+		return this.session;
 	}
 }
