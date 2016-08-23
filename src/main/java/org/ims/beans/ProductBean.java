@@ -97,7 +97,7 @@ public class ProductBean {
 	public double getUnitCost() {
 		return unitCost;
 	}
-	public void setUnitCost(int unitCost) {
+	public void setUnitCost(double unitCost) {
 		this.unitCost = unitCost;
 	}
 	public String getPackSize() {

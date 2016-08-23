@@ -19,9 +19,7 @@ public class IMSDAO {
 	}
 	
 	public void create(Object obj){
-		System.out.println("Creating "+obj);
 		session.save(obj);
-		System.out.println("Done Creating");
 	}
 	public Object retrieve(Object obj){
 		Object returnObj;
@@ -64,8 +62,8 @@ public class IMSDAO {
 		returnObj = query.uniqueResult();
 		return returnObj;
 	}
-  public boolean update(Object obj){
-  	return false;
+  public void update(Object obj){
+  	session.update(obj);
   }
   public boolean delete(Object obj){
   	return true;
@@ -74,4 +72,12 @@ public class IMSDAO {
 		Query query =session.createQuery("FROM StateAbbrvBean");
 		return query.list();
 	}
+  public List<ProductBean> getAllProducts(){
+  	Query query =session.createQuery("FROM ProductBean");
+		return query.list();
+  }
+  public List<ProductCategoryBean> getAllCategories(){
+  	Query query =session.createQuery("FROM ProductCategoryBean");
+		return query.list();
+  }
 }

@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Invoices</title>
 <link rel="stylesheet" href="./style.css">
 </head>
 <body>
@@ -17,9 +17,10 @@
 				<li><a href="home.jsp">Home</a></li>
 			  <li><a href="updateClientList.do">Update Client</a></li>
 			  <li><a href="updateProduct.do">Update Product</a></li>
-			  <li><a href="updateProductCats.do">Update Product</a></li>
-			  
+			  <li><a href="updateProductCats.do">Update Categories</a></li>
+			  <li><a href="genInvoices.do">View Products</a></li>
 			  <li><a href="viewProducts.do">View Products</a></li>
+			  
 			  <li><a href="invoices.do">Generate Invoices</a></li>
 			  <li><a href="reports.do">Generate Reports</a></li>
 			  <li><a href="faq.jsp">FAQ</a></li>
@@ -28,14 +29,23 @@
    </div>
    <div class="pagebody">
    	<div class="pagecenter">
-			<h2>Temporary Home</h2>
-			<a href="updateClientList.do">Client Update</a><br/>
-			<a href="updateProduct.do">Product Update</a><br/>
-			<button class="grad">Test</button>
+			<h2>Generate Invoices</h2>
+			<form:form>
+				<table class="fullwidth">
+					<tr>
+						<th>Short Name</th>
+						<th>Actual Name</th>
+						<th>Unit Cost</th>
+						<th>Quantity</th>
+						<th>Line Total</th>
+					</tr>
+					<tr>
+						
+					</tr>
+				</table>
+			</form:form>
 			<br/>
 		</div>
    </div>
-	</div>
-	<div class="cleardiv"></div>
 </body>
 </html>

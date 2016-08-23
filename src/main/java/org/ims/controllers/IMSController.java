@@ -1,5 +1,6 @@
 package org.ims.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
@@ -13,6 +14,7 @@ import org.ims.beans.AddressBean;
 import org.ims.beans.ClientBean;
 import org.ims.beans.ClientTypeBean;
 import org.ims.beans.ProductBean;
+import org.ims.beans.ProductCategoryBean;
 import org.ims.beans.StateAbbrvBean;
 import org.ims.middle.MiddleInterfaceF;
 import org.springframework.beans.factory.InitializingBean;
@@ -33,12 +35,33 @@ public class IMSController implements ServletContextAware,
 	@RequestMapping(value="updateProduct.do", method=RequestMethod.GET)
 	public String updateProduct(HttpServletRequest req){
 		req.setAttribute("newProduct", new ProductBean());
+		MiddleInterfaceF midF = new MiddleInterfaceF();
+		List<ProductCategoryBean> list = midF.getAllProductCats();
+		List<String> names = new ArrayList<>();
+		for(ProductCategoryBean p:list){
+			names.add(p.getCategoryDescription());
+			System.out.println(p.getCategoryDescription());
+		}
+		req.setAttribute("categories", names);
 		return "updateProduct";
 	}
 	@RequestMapping(value="updateClientList.do", method=RequestMethod.GET)
 	public String updateClientList(HttpServletRequest req){
 		req.setAttribute("myClient", new ClientBean());
 		return "updateClientList";
+	}
+	@RequestMapping(value="updateProductCats.do", method=RequestMethod.GET)
+	public String updateProductCats(HttpServletRequest req){
+		req.setAttribute("newProductCat", new ProductCategoryBean());
+		return "updateProductCat";
+	}
+	@RequestMapping(value="viewProducts.do", method=RequestMethod.GET)
+	public String viewProducts(HttpServletRequest req){
+		MiddleInterfaceF midF = new MiddleInterfaceF();
+		List<ProductBean> aList = midF.getAllProducts();
+		req.setAttribute("products", aList);
+		req.setAttribute("updateProduct", new ProductBean());
+		return "viewProducts";
 	}
 	@RequestMapping(value="registerProduct.do", method=RequestMethod.POST)
 	public ModelAndView registerProduct(@ModelAttribute("newProduct") @Valid ProductBean newProduct,
@@ -50,6 +73,34 @@ public class IMSController implements ServletContextAware,
 		}
 		MiddleInterfaceF midF = new MiddleInterfaceF();
 		midF.insertProduct(newProduct);
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("index");
+		return mv;
+	}
+	@RequestMapping(value="updateProduct.do", method=RequestMethod.POST)
+	public ModelAndView updateProduct(@ModelAttribute("updateProduct") @Valid ProductBean updateProduct,
+			BindingResult bindingResult,
+			HttpServletRequest req,
+			HttpServletResponse resp){
+		if(bindingResult.hasErrors()){
+			return new ModelAndView("updateProduct");
+		}
+		MiddleInterfaceF midF = new MiddleInterfaceF();
+		midF.insertProduct(updateProduct);
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("index");
+		return mv;
+	}
+	@RequestMapping(value="registerProductCat.do", method=RequestMethod.POST)
+	public ModelAndView registerProductCat(@ModelAttribute("newProduct") @Valid ProductCategoryBean newProductCat,
+			BindingResult bindingResult,
+			HttpServletRequest req,
+			HttpServletResponse resp){
+		if(bindingResult.hasErrors()){
+			return new ModelAndView("updateProduct");
+		}
+		MiddleInterfaceF midF = new MiddleInterfaceF();
+		midF.insertProductCat(newProductCat);
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("index");
 		return mv;
