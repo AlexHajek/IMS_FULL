@@ -12,14 +12,12 @@
 </head>
 <body>
 	<div class="fulldiv">
-   <div class="navbar grad">
+   <div class="navbar">
 			<ul>
 				<li><a href="home.jsp">Home</a></li>
 			  <li><a href="updateClientList.do">Update Client</a></li>
 			  <li><a href="updateProduct.do">Update Product</a></li>
 			  <li><a href="updateProductCats.do">Update Product</a></li>
-			  
-			  <li><a href="viewProducts.do">View Products</a></li>
 			  <li><a href="invoices.do">Generate Invoices</a></li>
 			  <li><a href="reports.do">Generate Reports</a></li>
 			  <li><a href="faq.jsp">FAQ</a></li>
@@ -28,10 +26,19 @@
    </div>
    <div class="pagebody">
    	<div class="pagecenter">
-			<h2>Temporary Home</h2>
-			<a href="updateClientList.do">Client Update</a><br/>
-			<a href="updateProduct.do">Product Update</a><br/>
-			<button class="grad">Test</button>
+   		<h1>Create New Product Category</h1>
+			<form:form action="registerProductCat.do" method="post" commandName="newProductCat">
+						<!-- path=bean property -->
+						<table class="fullwidth">
+							<tr>
+								<td>
+									Product Category:<br/> <form:input path="categoryDescription" cssClass="inputfields fullwidth"/> <br/>
+									<form:errors path="categoryDescription" cssClass="error" /><br/>
+								</td>
+							</tr>
+						</table>
+				<input type="submit" value="Register" />
+			</form:form>
 			<br/>
 		</div>
    </div>

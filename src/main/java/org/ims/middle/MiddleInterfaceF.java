@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.ims.IMS_WEB.DataLayer;
 import org.ims.beans.ProductBean;
+import org.ims.beans.ProductCategoryBean;
 import org.ims.beans.StateAbbrvBean;
 
 public class MiddleInterfaceF {
@@ -19,6 +20,16 @@ public class MiddleInterfaceF {
 		}
 		return rList;
 	}
+	public List<ProductBean> getAllProducts(){
+		List<ProductBean> rList = new ArrayList<>();
+		rList = dLayer.getAllProducts();
+		return rList;
+	}
+	public List<ProductCategoryBean> getAllProductCats(){
+		List<ProductCategoryBean> rList = new ArrayList<>();
+		rList = dLayer.getAllCategories();
+		return rList;
+	}
 	public boolean insertProduct(ProductBean product){
 		//Product Doesn't accept type at creation
 		product.setCategoriesForProduct(null);
@@ -26,8 +37,17 @@ public class MiddleInterfaceF {
 		product.setLinesForProduct(null);
 		//Avoiding this atm
 		product.setProductImage(null);
-		System.out.println(product.getUnitCost());
 		dLayer.create(product);
+		return true;
+	}
+	public boolean updateProduct(ProductBean product){
+		dLayer.update(product);
+		return true;
+	}
+	public boolean insertProductCat(ProductCategoryBean category){
+		//Product Categories contains nothing to begin with
+		category.setProductsForCategory(null);
+		dLayer.create(category);
 		return true;
 	}
 	@Override

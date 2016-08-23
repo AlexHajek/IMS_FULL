@@ -17,6 +17,7 @@
 				<li><a href="home.jsp">Home</a></li>
 			  <li><a href="updateClientList.do">Update Client</a></li>
 			  <li><a href="updateProduct.do">Update Product</a></li>
+			  <li><a href="updateProductCats.do">Update Product</a></li>
 			  <li><a href="invoices.do">Generate Invoices</a></li>
 			  <li><a href="reports.do">Generate Reports</a></li>
 			  <li><a href="faq.jsp">FAQ</a></li>
@@ -31,10 +32,6 @@
 						<table class="fullwidth">
 							<tr>
 								<td>
-									Product UPC:<br/> <form:input path="productUPC" cssClass="inputfields"/> <br/>
-									<form:errors path="productUPC" cssClass="error" /><br/>
-								</td>
-								<td>
 									Product Name:<br/> <form:input path="productName" cssClass="inputfields"/> <br/>
 									<form:errors path="productName" cssClass="error" /><br/>
 								</td>
@@ -45,6 +42,10 @@
 								<td>
 									Pack Size:<br/> <form:input path="packSize" cssClass="inputfields" /> <br/>
 									<form:errors path="packSize" cssClass="error" /><br/>
+								</td>
+								<td>
+									Product Category:<br/> <form:select path="categoriesForProduct" multiple="true"><form:options items="${categories}"/></form:select><br/>
+									<form:errors path="categoriesForProduct" cssClass="error" /><br/>
 								</td>
 							</tr>
 							<tr>

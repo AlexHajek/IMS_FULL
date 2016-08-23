@@ -28,11 +28,33 @@
    </div>
    <div class="pagebody">
    	<div class="pagecenter">
-			<h2>Temporary Home</h2>
-			<a href="updateClientList.do">Client Update</a><br/>
-			<a href="updateProduct.do">Product Update</a><br/>
-			<button class="grad">Test</button>
-			<br/>
+   		<table class="fullwidth">
+				<c:forEach var="t" items="${products}">
+					<tr>
+						<td><c:out value="${t.productUPC}"></c:out></td>
+						<td><c:out value="${t.productName}"></c:out></td>
+						<td><c:out value="${t.productDescription}"></c:out></td>
+						<td><c:out value="${t.shortName}"></c:out></td>
+						<td><c:out value="$ ${t.unitCost}"></c:out></td>
+						<td><c:out value="${t.packSize}"></c:out></td>
+						<td><c:out value="${t.reorderQuantity}"></c:out></td>
+						<td><c:out value="$ ${t.retailPrice}"></c:out></td>
+						<td><c:out value="${t.productWeight}"></c:out></td>
+						<td>
+							<form:form action="updateProduct.do" method="post" commandName="updateProduct">
+								<form:hidden path="productUPC" id="${t.productUPC}"/>
+								<form:button>Update</form:button>
+							</form:form>
+						</td>
+						<td>
+							<form:form action="deleteProduct.do" method="post" commandName="updateProduct">
+								<form:hidden path="productUPC" id="${t.productUPC}"/>
+								<form:button>Delete</form:button>
+							</form:form>
+						</td>
+					</tr>
+				</c:forEach>
+			</table>
 		</div>
    </div>
 	</div>
