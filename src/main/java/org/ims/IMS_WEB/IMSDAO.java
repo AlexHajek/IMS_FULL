@@ -80,4 +80,8 @@ public class IMSDAO {
   	Query query =session.createQuery("FROM ProductCategoryBean");
 		return query.list();
   }
+  public List<ClientTypeBean> getAllClientTypes(){
+	  	Query query = session.createQuery("FROM ClientTypeBean");
+	  	return query.list();
+}
 }

@@ -95,6 +95,8 @@ public class ClientBean {
 	}
 	public ClientBean() {
 		super();
+		this.address = new AddressBean();
+		this.clientType = new ClientTypeBean();
 	}
 	public ClientBean(int id, String name, String email, String pocn, String phone, String fax, AddressBean address,
 	    ClientTypeBean clientType) {

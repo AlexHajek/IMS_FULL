@@ -68,9 +68,15 @@ public class AddressBean {
 	public void setAddressZip(String addressZip) {
 		this.addressZip = addressZip;
 	}
+	public StateAbbrvBean getStateAbbrv() {
+		return stateAbbrv;
+	}
+	public void setStateAbbrv(StateAbbrvBean stateAbbrv) {
+		this.stateAbbrv = stateAbbrv;
+	}
 	public AddressBean() {
 		super();
-		// TODO Auto-generated constructor stub
+		this.stateAbbrv = new StateAbbrvBean();
 	}
 	public AddressBean(int addressId, String streetAddress1, String streetAddress2, String addressCity,
 			String addressZip, StateAbbrvBean stateAbbrv) {
