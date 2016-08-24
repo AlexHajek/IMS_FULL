@@ -17,7 +17,7 @@
 				<li><a href="home.jsp">Home</a></li>
 			  <li><a href="updateClientList.do">Update Client</a></li>
 			  <li><a href="updateProduct.do">Update Product</a></li>
-			  <li><a href="updateProductCats.do">Update Product</a></li>
+			  <li><a href="updateProductCats.do">Update Categories</a></li>
 			  
 			  <li><a href="viewProducts.do">View Products</a></li>
 			  <li><a href="invoices.do">Generate Invoices</a></li>
