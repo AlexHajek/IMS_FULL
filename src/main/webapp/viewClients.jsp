@@ -14,7 +14,8 @@
 				<li><a href="home.jsp">Home</a></li>
 			  <li><a href="updateClientList.do">Update Client</a></li>
 			  <li><a href="updateProduct.do">Update Product</a></li>
-			  <li><a href="updateProductCats.do">Update Product</a></li>
+			  <li><a href="updateProductCats.do">Update Categories</a></li>
+			  <li><a href="viewProducts.do">View Products</a></li>
 			  <li><a href="invoices.do">Generate Invoices</a></li>
 			  <li><a href="reports.do">Generate Reports</a></li>
 			  <li><a href="faq.jsp">FAQ</a></li>
@@ -23,9 +24,10 @@
    </div>
    <div class="pagebody">
    	<div class="pagecenter">
-			<h2>Registered Clients</h2>
-<a href="updateClientList.do">Add a Client</a>
-	<table>
+			<h1>Success! Added new client. </h1>
+<a href="updateClientList.do">Add a New Client</a>
+
+	<!-- <table>
 		<tr><th>Id</th><th>Name</th><th>Email</th><th>PoCName</th><th>Phone</th><th>Fax</th></tr>
 		<c:forEach var="client" items="${clientList}">
 			<tr>
@@ -38,6 +40,7 @@
 			</tr>
 		</c:forEach>
 	</table>
+	 -->
 			<br/>
 		</div>
    </div>

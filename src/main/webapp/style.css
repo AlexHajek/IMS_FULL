@@ -72,3 +72,11 @@ li a:hover {
 .fullwidth{
 	width: 100%;
 }
+.partwidth{
+	width: 70%;
+	text-align: center;
+}
+.centerpanel{
+	text-align: center;
+	margin: 0 auto;
+}
