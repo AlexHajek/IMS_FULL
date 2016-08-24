@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -9,39 +12,36 @@
 </head>
 <body>
 	<div class="fulldiv">
-   <div class="navbar grad">
-			<ul>
-				<li><a href="home.jsp">Home</a></li>
-			  <li><a href="updateClientList.do">Update Client</a></li>
-			  <li><a href="updateProduct.do">Update Product</a></li>
-			  <li><a href="updateProductCats.do">Update Categories</a></li>
-			  <li><a href="viewProducts.do">View Products</a></li>
-			  <li><a href="invoices.do">Generate Invoices</a></li>
-			  <li><a href="reports.do">Generate Reports</a></li>
-			  <li><a href="faq.jsp">FAQ</a></li>
-			  <li><a href="about.jsp">About</a></li>
-			</ul>
-   </div>
+   <script src="navbar.js"></script>
    <div class="pagebody">
    	<div class="pagecenter">
-			<h1>Success! Added new client. </h1>
-<a href="updateClientList.do">Add a New Client</a>
-
-	<!-- <table>
-		<tr><th>Id</th><th>Name</th><th>Email</th><th>PoCName</th><th>Phone</th><th>Fax</th></tr>
-		<c:forEach var="client" items="${clientList}">
-			<tr>
-				<td><c:out value="${client.id}"></c:out></td>
-				<td><c:out value="${client.name}"></c:out></td>
-				<td><c:out value="${client.email}"></c:out></td>
-				<td><c:out value="${client.pocn}"></c:out></td>
-				<td><c:out value="${client.phone}"></c:out></td>
-				<td><c:out value="${client.fax}"></c:out></td>
-			</tr>
-		</c:forEach>
-	</table>
-	 -->
-			<br/>
+   		<table class="fullwidth">
+				<c:forEach var="t" items="${clients}">
+					<tr>
+						<td><c:out value="${t.id}"></c:out></td>
+						<td><c:out value="${t.name}"></c:out></td>
+						<td><c:out value="${t.email}"></c:out></td>
+						<td><c:out value="${t.pocn}"></c:out></td>
+						<td><c:out value="${t.phone}"></c:out></td>
+						<td><c:out value="${t.fax}"></c:out></td>
+						<td><c:out value="${t.address.streetAddress1}"></c:out></td>
+						<td><c:out value="${t.address.addressCity}"></c:out></td>
+						<td><c:out value="${t.address.stateAbbrv.arrvId}"></c:out></td>
+						<td>
+							<form:form action="updateProductInfo.do" method="post" commandName="updateClient">
+								<form:hidden path="id" id="${t.id}"/>
+								<form:button>Update</form:button>
+							</form:form>
+						</td>
+						<td>
+							<form:form action="deleteProduct.do" method="post" commandName="updateClient">
+								<form:hidden path="id" id="${t.id}"/>
+								<form:button>Delete</form:button>
+							</form:form>
+						</td>
+					</tr>
+				</c:forEach>
+			</table>
 		</div>
    </div>
 	</div>
