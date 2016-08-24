@@ -167,6 +167,18 @@ public class IMSController implements ServletContextAware,
 		req.setAttribute("updateClient", new ClientBean());
 		return new ModelAndView("viewClients");
 	}
+
+	@RequestMapping(value="ajaxtest.do", method=RequestMethod.GET)
+	public String getProducts(HttpServletRequest req){
+		MiddleInterfaceF midF = new MiddleInterfaceF();
+		List<ProductBean> aList = midF.getAllProducts();
+		List<String> nameList = new ArrayList<String>();
+		for(ProductBean a: aList){
+			nameList.add(a.getShortName());
+		}
+		req.setAttribute("products", nameList);
+		return "ajaxtest";
+	}
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		List<ClientBean> clients = new Vector<>();

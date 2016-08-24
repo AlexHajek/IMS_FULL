@@ -98,6 +98,13 @@ public class MiddleInterfaceF {
 		ClientTypeBean myBean = (ClientTypeBean)criteria.uniqueResult();
 		return myBean;
 	}
+	public ProductBean getProductByShort(String myshort){
+		Session session = dLayer.getSession();
+		Criteria criteria = session.createCriteria(ProductBean.class)
+				.add(Restrictions.eq("shortName", myshort));
+		ProductBean myBean = (ProductBean)criteria.uniqueResult();
+		return myBean;
+	}
 	@Override
 	protected void finalize() throws Throwable {
 		dLayer.close();
