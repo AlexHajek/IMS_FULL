@@ -44,7 +44,9 @@
 									<form:errors path="packSize" cssClass="error" /><br/>
 								</td>
 								<td>
-									Product Category:<br/> <form:select path="categoriesForProduct" multiple="true"><form:options items="${categories}"/></form:select><br/>
+									Product Category:<br/> 	<form:select path="categoriesString" multiple="true">
+											<form:options items="${categories}" itemValue="categoryId" itemLabel="categoryDescription" />
+										</form:select><br/>
 									<form:errors path="categoriesForProduct" cssClass="error" /><br/>
 								</td>
 							</tr>

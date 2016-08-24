@@ -13,6 +13,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -60,6 +61,10 @@ public class ProductBean {
 	private double productWeight;
 	@Column(name="PRODUCT_IMAGE")
 	private Blob productImage;
+	//Controller use only
+	@Transient
+	private String[] categoriesString;
+	
 	@ManyToMany
 	@JoinTable(name="PRODUCT_CATEGORIES",
 					joinColumns=@JoinColumn(name="PRODUCT_UPC"),
@@ -143,7 +148,13 @@ public class ProductBean {
 	public void setLinesForProduct(Set<POLineBean> linesForProduct) {
 		this.linesForProduct = linesForProduct;
 	}
-
+	//Controller use only
+	public String[] getCategoriesString() {
+		return categoriesString;
+	}
+	public void setCategoriesString(String[] categoriesString) {
+		this.categoriesString = categoriesString;
+	}
 	public ProductBean() {
 		super();
 		// TODO Auto-generated constructor stub
