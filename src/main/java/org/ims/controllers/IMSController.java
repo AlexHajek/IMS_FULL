@@ -32,15 +32,15 @@ public class IMSController implements ServletContextAware,
 	@Autowired
 	private ServletContext servletContext; //instance var
 	@RequestMapping(value="updateProduct.do", method=RequestMethod.GET)
-	public String updateProduct(HttpServletRequest req){
+	public ModelAndView updateProduct(HttpServletRequest req){
 		req.setAttribute("newProduct", new ProductBean());
 		MiddleInterfaceF midF = new MiddleInterfaceF();
 		List<ProductCategoryBean> list = midF.getAllProductCats();
 		req.setAttribute("categories", list);
-		return "updateProduct";
+		return new ModelAndView("updateProduct");
 	}
 	@RequestMapping(value="updateClientList.do", method=RequestMethod.GET)
-	public String updateClientList(HttpServletRequest req){
+	public ModelAndView updateClientList(HttpServletRequest req){
 		MiddleInterfaceF mid = new MiddleInterfaceF();
 		req.setAttribute("myClient", new ClientBean());
 		List<StateAbbrvBean> abbrvList = mid.getAbbrvBeans();
@@ -48,20 +48,20 @@ public class IMSController implements ServletContextAware,
 		req.setAttribute("myAbbrvs", abbrvList);
 		req.setAttribute("clientTypes", typeList);
 		System.out.println("UPDATING!!!!!!");
-		return "updateClientList";
+		return new ModelAndView("updateClientList");
 	}
 	@RequestMapping(value="updateProductCats.do", method=RequestMethod.GET)
-	public String updateProductCats(HttpServletRequest req){
+	public ModelAndView updateProductCats(HttpServletRequest req){
 		req.setAttribute("newProductCat", new ProductCategoryBean());
-		return "updateProductCat";
+		return new ModelAndView("updateProductCat");
 	}
 	@RequestMapping(value="viewProducts.do", method=RequestMethod.GET)
-	public String viewProducts(HttpServletRequest req){
+	public ModelAndView viewProducts(HttpServletRequest req){
 		MiddleInterfaceF midF = new MiddleInterfaceF();
 		List<ProductBean> aList = midF.getAllProducts();
 		req.setAttribute("products", aList);
 		req.setAttribute("updateProduct", new ProductBean());
-		return "viewProducts";
+		return new ModelAndView("viewProducts");
 	}
 	@RequestMapping(value="registerProduct.do", method=RequestMethod.POST)
 	public ModelAndView registerProduct(@ModelAttribute("newProduct") @Valid ProductBean newProduct,
@@ -69,17 +69,15 @@ public class IMSController implements ServletContextAware,
 			HttpServletRequest req,
 			HttpServletResponse resp){
 		if(bindingResult.hasErrors()){
-			return new ModelAndView("updateProduct");
+			return this.updateProduct(req);
 		}
 		MiddleInterfaceF midF = new MiddleInterfaceF();
 		
 		midF.insertProduct(newProduct);
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("index");
-		return mv;
+		return this.viewProducts(req);
 	}
-	@RequestMapping(value="updateProduct.do", method=RequestMethod.POST)
-	public ModelAndView updateProduct(@ModelAttribute("updateProduct") @Valid ProductBean updateProduct,
+	@RequestMapping(value="updateProductInfo.do", method=RequestMethod.POST)
+	public ModelAndView updateProductInfo(@ModelAttribute("updateProduct") @Valid ProductBean updateProduct,
 			BindingResult bindingResult,
 			HttpServletRequest req,
 			HttpServletResponse resp){
@@ -98,7 +96,7 @@ public class IMSController implements ServletContextAware,
 			HttpServletRequest req,
 			HttpServletResponse resp){
 		if(bindingResult.hasErrors()){
-			return new ModelAndView("updateProduct");
+			return this.updateProductCats(req);
 		}
 		MiddleInterfaceF midF = new MiddleInterfaceF();
 		midF.insertProductCat(newProductCat);
@@ -115,7 +113,7 @@ public class IMSController implements ServletContextAware,
 			){
 		if(bindingResult.hasErrors()){
 			System.out.println("bindingResult failed!");
-			return new ModelAndView("updateClientList");
+			return this.updateClientList(req);
 		}
 		@SuppressWarnings("unchecked")
 		Vector<ClientBean> clientList = (Vector<ClientBean>)this.servletContext.getAttribute("clientList");
@@ -130,18 +128,15 @@ public class IMSController implements ServletContextAware,
 		midF.insertObject(myClient.getAddress());
 		midF.insertObject(myClient);
 		req.getSession().setAttribute("clientList", clientList);
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("viewClients"); 	//viewClients.jsp
-		mv.addObject("success", "Successfully added client!");	
-		return mv;
+		return this.viewClients(req);
 	}
 	@RequestMapping(value="viewClients.do", method=RequestMethod.GET)
-	public String viewClients(HttpServletRequest req){
+	public ModelAndView viewClients(HttpServletRequest req){
 		MiddleInterfaceF midF = new MiddleInterfaceF();
 		List<ClientBean> aList = midF.getAllClients();
 		req.setAttribute("clients", aList);
 		req.setAttribute("updateClient", new ClientBean());
-		return "viewClients";
+		return new ModelAndView("viewClients");
 	}
 	@Override
 	public void afterPropertiesSet() throws Exception {
