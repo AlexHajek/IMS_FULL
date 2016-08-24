@@ -15,6 +15,9 @@ import javax.persistence.Table;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
 @Entity
 @Table(name="IMS_PURCHASE_ORDER")
 public class PurchaseOrderBean {
@@ -39,9 +42,11 @@ public class PurchaseOrderBean {
 	@NotNull(message="Total is required")
 	@Min(value=0,message="Invalid Price")
 	private double poTotal;
+	@Cascade({CascadeType.SAVE_UPDATE})
 	@ManyToOne
 	@JoinColumn(name="CLIENT_ID",nullable=false)
 	private ClientBean client;
+	@Cascade({CascadeType.SAVE_UPDATE})
 	@OneToMany(mappedBy="order")
 	private Set<POLineBean> orderLines;
 

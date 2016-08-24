@@ -47,7 +47,6 @@ public class IMSController implements ServletContextAware,
 		List<ClientTypeBean> typeList = mid.getClientTypes();
 		req.setAttribute("myAbbrvs", abbrvList);
 		req.setAttribute("clientTypes", typeList);
-		System.out.println("UPDATING!!!!!!");
 		return new ModelAndView("updateClientList");
 	}
 	@RequestMapping(value="updateProductCats.do", method=RequestMethod.GET)
@@ -82,13 +81,29 @@ public class IMSController implements ServletContextAware,
 			HttpServletRequest req,
 			HttpServletResponse resp){
 		if(bindingResult.hasErrors()){
-			return new ModelAndView("updateProduct");
+			return this.viewProducts(req);
 		}
 		MiddleInterfaceF midF = new MiddleInterfaceF();
-		midF.insertProduct(updateProduct);
+		midF.updateProduct(updateProduct);
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("index");
 		return mv;
+	}
+		@RequestMapping(value="deleteProduct.do", method=RequestMethod.POST)
+	public ModelAndView deleteProduct(ProductBean updateProduct,
+			HttpServletRequest req,
+			HttpServletResponse resp){
+		
+		MiddleInterfaceF midF = new MiddleInterfaceF();
+		List<ProductBean> aList = midF.getAllProducts();
+		for(ProductBean p:aList){
+			if(p.getProductUPC()==updateProduct.getProductUPC()){
+				updateProduct = p;
+				break;
+			}
+		}
+		midF.delete(updateProduct);
+		return this.viewProducts(req);
 	}
 	@RequestMapping(value="registerProductCat.do", method=RequestMethod.POST)
 	public ModelAndView registerProductCat(@ModelAttribute("newProduct") @Valid ProductCategoryBean newProductCat,
@@ -129,6 +144,20 @@ public class IMSController implements ServletContextAware,
 		midF.insertObject(myClient);
 		req.getSession().setAttribute("clientList", clientList);
 		return this.viewClients(req);
+	}
+	@RequestMapping(value="updateClientInfo.do", method=RequestMethod.POST)
+	public ModelAndView updateClientInfo(@ModelAttribute("updateProduct") @Valid ClientBean updateClient,
+			BindingResult bindingResult,
+			HttpServletRequest req,
+			HttpServletResponse resp){
+		if(bindingResult.hasErrors()){
+			return new ModelAndView("updateProduct");
+		}
+		MiddleInterfaceF midF = new MiddleInterfaceF();
+		midF.updateClient(updateClient);
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("index");
+		return mv;
 	}
 	@RequestMapping(value="viewClients.do", method=RequestMethod.GET)
 	public ModelAndView viewClients(HttpServletRequest req){
