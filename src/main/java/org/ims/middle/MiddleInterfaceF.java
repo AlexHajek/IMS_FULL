@@ -36,6 +36,11 @@ public class MiddleInterfaceF {
 		rList = dLayer.getAllCategories();
 		return rList;
 	}
+	public List<ClientBean> getAllClients(){
+		List<ClientBean> rList = new ArrayList<>();
+		rList = dLayer.getAllClients();
+		return rList;
+	}
 	public boolean insertProduct(ProductBean product){
 		//Product is not in any Lines yet
 		product.setLinesForProduct(null);

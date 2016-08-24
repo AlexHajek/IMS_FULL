@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.ims.beans.ClientBean;
 import org.ims.beans.ClientTypeBean;
 import org.ims.beans.ProductBean;
 import org.ims.beans.ProductCategoryBean;
@@ -38,6 +39,10 @@ public class DataLayer {
 	
 	public List<ProductCategoryBean> getAllCategories(){
 		return dao.getAllCategories();
+	}
+	
+	public List<ClientBean> getAllClients(){
+		return dao.getAllClients();
 	}
 	
 	public void create(Object obj){
