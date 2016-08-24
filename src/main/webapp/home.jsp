@@ -24,6 +24,7 @@
 			  <li><a href="reports.do">Generate Reports</a></li>
 			  <li><a href="faq.jsp">FAQ</a></li>
 			  <li><a href="about.jsp">About</a></li>
+			  <li><a href="ajaxtest.do">AjaxTest</a></li>
 			</ul>
    </div>
    <div class="pagebody">
