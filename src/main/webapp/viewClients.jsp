@@ -23,9 +23,10 @@
    </div>
    <div class="pagebody">
    	<div class="pagecenter">
-			<h2>Registered Clients</h2>
-<a href="updateClientList.do">Add a Client</a>
-	<table>
+			<h1>Success! Added new client. </h1>
+<a href="updateClientList.do">Add a New Client</a>
+
+	<!-- <table>
 		<tr><th>Id</th><th>Name</th><th>Email</th><th>PoCName</th><th>Phone</th><th>Fax</th></tr>
 		<c:forEach var="client" items="${clientList}">
 			<tr>
@@ -38,6 +39,7 @@
 			</tr>
 		</c:forEach>
 	</table>
+	 -->
 			<br/>
 		</div>
    </div>

@@ -9,9 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
-import org.hibernate.Criteria;
-import org.hibernate.Session;
-import org.hibernate.criterion.Restrictions;
+import org.ims.IMS_WEB.DataLayer;
 import org.ims.beans.ClientBean;
 import org.ims.beans.ClientTypeBean;
 import org.ims.beans.ProductBean;
@@ -54,6 +52,7 @@ public class IMSController implements ServletContextAware,
 		List<ClientTypeBean> typeList = mid.getClientTypes();
 		req.setAttribute("myAbbrvs", abbrvList);
 		req.setAttribute("clientTypes", typeList);
+		System.out.println("UPDATING!!!!!!");
 		return "updateClientList";
 	}
 	@RequestMapping(value="updateProductCats.do", method=RequestMethod.GET)
@@ -125,18 +124,9 @@ public class IMSController implements ServletContextAware,
 		@SuppressWarnings("unchecked")
 		Vector<ClientBean> clientList = (Vector<ClientBean>)this.servletContext.getAttribute("clientList");
 		
-		System.out.println(req.getParameter("id"));
-		System.out.println(req.getParameter("name"));
-		
 		MiddleInterfaceF midF = new MiddleInterfaceF();
-		Session session = midF.getDataLayer().getSession();
-		
-		Criteria criteria = session.createCriteria(StateAbbrvBean.class)
-				.add(Restrictions.eq("arrvId", myClient.getAddress().getStateAbbrv().getArrvId()));
-		Criteria criteria2 = session.createCriteria(ClientTypeBean.class)
-				.add(Restrictions.eq("clientTypeId", myClient.getClientType().getClientTypeId()));
-		StateAbbrvBean myBean = (StateAbbrvBean)criteria.uniqueResult();
-		ClientTypeBean myBean2 = (ClientTypeBean)criteria2.uniqueResult();
+		StateAbbrvBean myBean = midF.getStateAbbrvById(myClient);
+		ClientTypeBean myBean2 = midF.getClientTypeById(myClient);
 		
 		myClient.getAddress().setStateAbbrv(myBean);
 		myClient.setClientType(myBean2);
