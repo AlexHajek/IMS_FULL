@@ -28,7 +28,7 @@
 						<td><c:out value="$ ${t.retailPrice}"></c:out></td>
 						<td><c:out value="${t.productWeight}"></c:out></td>
 						<td>
-							<form:form action="updateProduct.do" method="post" commandName="updateProduct">
+							<form:form action="updateProductInfo.do" method="post" commandName="updateProduct">
 								<form:hidden path="productUPC" id="${t.productUPC}"/>
 								<form:button>Update</form:button>
 							</form:form>

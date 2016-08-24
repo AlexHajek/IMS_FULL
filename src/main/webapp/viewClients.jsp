@@ -28,7 +28,7 @@
 						<td><c:out value="${t.address.addressCity}"></c:out></td>
 						<td><c:out value="${t.address.stateAbbrv.arrvId}"></c:out></td>
 						<td>
-							<form:form action="updateProduct.do" method="post" commandName="updateClient">
+							<form:form action="updateProductInfo.do" method="post" commandName="updateClient">
 								<form:hidden path="id" id="${t.id}"/>
 								<form:button>Update</form:button>
 							</form:form>
