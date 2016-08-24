@@ -29,13 +29,13 @@
 						<td><c:out value="${t.productWeight}"></c:out></td>
 						<td>
 							<form:form action="updateProductInfo.do" method="post" commandName="updateProduct">
-								<form:hidden path="productUPC" id="${t.productUPC}"/>
+								<form:hidden path="productUPC" value="${t.productUPC}"/>
 								<form:button>Update</form:button>
 							</form:form>
 						</td>
 						<td>
 							<form:form action="deleteProduct.do" method="post" commandName="updateProduct">
-								<form:hidden path="productUPC" id="${t.productUPC}"/>
+								<form:hidden path="productUPC" value="${t.productUPC}"/>
 								<form:button>Delete</form:button>
 							</form:form>
 						</td>

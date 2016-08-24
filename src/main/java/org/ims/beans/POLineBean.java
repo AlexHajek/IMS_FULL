@@ -4,6 +4,9 @@ import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
 @Entity
 @Table(name="IMS_PO_LINE")
 public class POLineBean {
@@ -21,9 +24,11 @@ public class POLineBean {
 	private int quantityOrdered;
 	
 	//mappings
+	@Cascade({CascadeType.SAVE_UPDATE})
 	@ManyToOne
 	@JoinColumn(name="PRODUCT_UPC", nullable=false)
 	private ProductBean product;
+	@Cascade({CascadeType.SAVE_UPDATE})
 	@ManyToOne
 	@JoinColumn(name="ORDER_NUMBER", nullable=false)
 	private PurchaseOrderBean order;

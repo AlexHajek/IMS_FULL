@@ -46,6 +46,8 @@ public class MiddleInterfaceF {
 		product.setLinesForProduct(null);
 		//Avoiding this atm
 		product.setProductImage(null);
+		//Set to 0 at creation
+		product.setOnHandQuantity(0);
 //		String[] strings = product.getCategoriesString();
 //		Set<ProductCategoryBean> beanSet = 
 		dLayer.create(product);
@@ -53,6 +55,14 @@ public class MiddleInterfaceF {
 	}
 	public boolean updateProduct(ProductBean product){
 		dLayer.update(product);
+		return true;
+	}
+	public boolean updateClient(ClientBean client){
+		dLayer.update(client);
+		return true;
+	}
+	public boolean delete(Object obj){
+		dLayer.delete(obj);
 		return true;
 	}
 	public boolean insertProductCat(ProductCategoryBean category){

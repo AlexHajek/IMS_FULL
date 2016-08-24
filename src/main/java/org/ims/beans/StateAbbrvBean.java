@@ -7,6 +7,9 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
 
 @Entity
 @Table(name="IMS_STATE_ABBRV")
@@ -29,6 +32,7 @@ public class StateAbbrvBean {
 	@Size(min=2,max=2,message="stateAbbrv not of size 2!")
 	private String stateAbbrv;
 	
+	@Cascade({CascadeType.SAVE_UPDATE})
 	@OneToMany(mappedBy="stateAbbrv")
 	private Set<AddressBean> stateAddressSet;
 	

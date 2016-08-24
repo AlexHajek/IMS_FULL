@@ -7,6 +7,9 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
 
 @Entity
 @Table(name="IMS_PRODUCT_CATEGORY")
@@ -22,7 +25,7 @@ public class ProductCategoryBean {
 	@NotNull(message="Description is required")
 	@Size(max=50,message="Too Long")
 	private String categoryDescription;
-	
+	@Cascade({CascadeType.SAVE_UPDATE})
 	@ManyToMany
 	@JoinTable(name="PRODUCT_CATEGORIES",
 					joinColumns=@JoinColumn(name="CATEGORY_ID"),

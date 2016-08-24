@@ -8,6 +8,9 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
 @Entity
 @Table(name="IMS_CLIENT")
 public class ClientBean {
@@ -39,9 +42,11 @@ public class ClientBean {
 	private String fax;
 	
 //Mappings
+	@Cascade({CascadeType.SAVE_UPDATE})
 	@OneToOne
 	@JoinColumn(name="ADDRESS_ID", nullable=false)
 	private AddressBean address;
+	@Cascade({CascadeType.SAVE_UPDATE})
 	@ManyToOne
 	@JoinColumn(name="CLIENT_TYPE_ID", nullable=false)
 	private ClientTypeBean clientType;
