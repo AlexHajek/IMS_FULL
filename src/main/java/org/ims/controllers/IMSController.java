@@ -135,6 +135,7 @@ public class IMSController implements ServletContextAware,
 		mv.addObject("success", "Successfully added client!");	
 		return mv;
 	}
+	
 	@RequestMapping(value="ajaxtest.do", method=RequestMethod.GET)
 	public String getProducts(HttpServletRequest req){
 		MiddleInterfaceF midF = new MiddleInterfaceF();
