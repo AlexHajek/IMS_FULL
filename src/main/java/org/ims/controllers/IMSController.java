@@ -135,7 +135,14 @@ public class IMSController implements ServletContextAware,
 		mv.addObject("success", "Successfully added client!");	
 		return mv;
 	}
-	
+	@RequestMapping(value="viewClients.do", method=RequestMethod.GET)
+	public String viewClients(HttpServletRequest req){
+		MiddleInterfaceF midF = new MiddleInterfaceF();
+		List<ClientBean> aList = midF.getAllClients();
+		req.setAttribute("clients", aList);
+		req.setAttribute("updateClient", new ClientBean());
+		return "viewClients";
+	}
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		List<ClientBean> clients = new Vector<>();
