@@ -56,5 +56,5 @@ public class ProductCategoryBean {
 		this.categoryId = categoryId;
 		this.categoryDescription = categoryDescription;
 		this.productsForCategory = productsForCategory;
-	}
+	}	
 }

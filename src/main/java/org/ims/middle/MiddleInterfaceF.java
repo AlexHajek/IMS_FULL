@@ -2,6 +2,7 @@ package org.ims.middle;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.ims.IMS_WEB.DataLayer;
 import org.ims.beans.ClientTypeBean;
@@ -32,12 +33,12 @@ public class MiddleInterfaceF {
 		return rList;
 	}
 	public boolean insertProduct(ProductBean product){
-		//Product Doesn't accept type at creation
-		product.setCategoriesForProduct(null);
 		//Product is not in any Lines yet
 		product.setLinesForProduct(null);
 		//Avoiding this atm
 		product.setProductImage(null);
+//		String[] strings = product.getCategoriesString();
+//		Set<ProductCategoryBean> beanSet = 
 		dLayer.create(product);
 		return true;
 	}

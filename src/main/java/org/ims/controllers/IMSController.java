@@ -38,12 +38,7 @@ public class IMSController implements ServletContextAware,
 		req.setAttribute("newProduct", new ProductBean());
 		MiddleInterfaceF midF = new MiddleInterfaceF();
 		List<ProductCategoryBean> list = midF.getAllProductCats();
-		List<String> names = new ArrayList<>();
-		for(ProductCategoryBean p:list){
-			names.add(p.getCategoryDescription());
-			System.out.println(p.getCategoryDescription());
-		}
-		req.setAttribute("categories", names);
+		req.setAttribute("categories", list);
 		return "updateProduct";
 	}
 	@RequestMapping(value="updateClientList.do", method=RequestMethod.GET)
@@ -78,6 +73,7 @@ public class IMSController implements ServletContextAware,
 			return new ModelAndView("updateProduct");
 		}
 		MiddleInterfaceF midF = new MiddleInterfaceF();
+		
 		midF.insertProduct(newProduct);
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("index");
@@ -124,9 +120,6 @@ public class IMSController implements ServletContextAware,
 		}
 		@SuppressWarnings("unchecked")
 		Vector<ClientBean> clientList = (Vector<ClientBean>)this.servletContext.getAttribute("clientList");
-		
-		System.out.println(req.getParameter("id"));
-		System.out.println(req.getParameter("name"));
 		
 		MiddleInterfaceF midF = new MiddleInterfaceF();
 		Session session = midF.getDataLayer().getSession();
