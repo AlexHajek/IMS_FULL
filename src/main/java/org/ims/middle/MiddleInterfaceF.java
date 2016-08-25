@@ -65,6 +65,10 @@ public class MiddleInterfaceF {
 		dLayer.delete(obj);
 		return true;
 	}
+	public boolean deleteClient(ClientBean client){
+		dLayer.deleteClient(client);
+		return true;
+	}
 	public boolean insertProductCat(ProductCategoryBean category){
 		//Product Categories contains nothing to begin with
 		category.setProductsForCategory(null);

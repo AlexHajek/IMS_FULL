@@ -21,7 +21,7 @@
 						<table class="fullwidth">
 							<tr>
 								<td>
-									Product Name:<br/> <form:input path="productName" cssClass="inputfields"/> <br/>
+									Product Name:<br/> <form:input path="productName"/> <br/>
 									<form:errors path="productName" cssClass="error" /><br/>
 								</td>
 								<td>
