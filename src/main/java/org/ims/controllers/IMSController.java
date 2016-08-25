@@ -184,6 +184,7 @@ public class IMSController implements ServletContextAware,
 		req.setAttribute("updateClient", new ClientBean());
 		return new ModelAndView("viewClients");
 	}
+
 	@RequestMapping(value="deleteClient.do", method=RequestMethod.POST)
 	public ModelAndView deleteClient(ClientBean updateClient,
 			HttpServletRequest req,
@@ -202,17 +203,30 @@ public class IMSController implements ServletContextAware,
 		midF.deleteClient(updateClient);
 		return this.viewClients(req);
 	}
-	@RequestMapping(value="ajaxtest.do", method=RequestMethod.GET)
+	@RequestMapping(value="invoices.do", method=RequestMethod.GET)
 	public String getProducts(HttpServletRequest req){
 		MiddleInterfaceF midF = new MiddleInterfaceF();
 		List<ProductBean> aList = midF.getAllProducts();
 		List<String> nameList = new ArrayList<String>();
+		nameList.add("--");
 		for(ProductBean a: aList){
 			nameList.add(a.getShortName());
 		}
 		req.setAttribute("products", nameList);
-		return "ajaxtest";
+		return "invoices";
 	}
+//	@RequestMapping(value="invoices.do", method=RequestMethod.GET)
+//	public String getClients(HttpServletRequest req){
+//		MiddleInterfaceF midF = new MiddleInterfaceF();
+//		List<ClientBean> aList = midF.getAllClients();
+//		List<String> nameList = new ArrayList<String>();
+//		nameList.add("--");
+//		for(ClientBean a: aList){
+//			nameList.add(a.getName());
+//		}
+//		req.setAttribute("clients", nameList);
+//		return "invoices";
+//	}
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		List<ClientBean> clients = new Vector<>();

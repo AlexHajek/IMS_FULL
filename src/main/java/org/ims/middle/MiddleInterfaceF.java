@@ -109,6 +109,13 @@ public class MiddleInterfaceF {
 		ProductBean myBean = (ProductBean)criteria.uniqueResult();
 		return myBean;
 	}
+	public ClientBean getClientByName(String myname){
+		Session session = dLayer.getSession();
+		Criteria criteria = session.createCriteria(ClientBean.class)
+				.add(Restrictions.eq("clientName", myname));
+		ClientBean myBean = (ClientBean)criteria.uniqueResult();
+		return myBean;
+	}
 	@Override
 	protected void finalize() throws Throwable {
 		dLayer.close();
