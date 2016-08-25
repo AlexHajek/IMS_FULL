@@ -28,14 +28,14 @@
 						<td><c:out value="${t.address.addressCity}"></c:out></td>
 						<td><c:out value="${t.address.stateAbbrv.arrvId}"></c:out></td>
 						<td>
-							<form:form action="updateProductInfo.do" method="post" commandName="updateClient">
-								<form:hidden path="id" id="${t.id}"/>
+							<form:form action="updateClientInfo.do" method="post" commandName="updateClient">
+								<form:hidden path="id" value="${t.id}"/>
 								<form:button>Update</form:button>
 							</form:form>
 						</td>
 						<td>
-							<form:form action="deleteProduct.do" method="post" commandName="updateClient">
-								<form:hidden path="id" id="${t.id}"/>
+							<form:form action="deleteClient.do" method="post" commandName="updateClient">
+								<form:hidden path="id" value="${t.id}"/>
 								<form:button>Delete</form:button>
 							</form:form>
 						</td>
