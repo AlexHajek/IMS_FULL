@@ -42,6 +42,15 @@ li a:hover {
 	margin: 0;
   padding: 0;
 }
+.pagebody2{
+	float:right;
+	width: 90%;
+	min-height: 100vh;
+	height: auto;
+	margin: 0 auto;
+	text-align: center;
+  padding: 0;
+}
 .pagecenter{
 	margin: 0 auto;
 	text-align: center;
