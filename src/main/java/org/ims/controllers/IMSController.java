@@ -47,7 +47,6 @@ public class IMSController implements ServletContextAware,
 		List<ClientTypeBean> typeList = mid.getClientTypes();
 		req.setAttribute("myAbbrvs", abbrvList);
 		req.setAttribute("clientTypes", typeList);
-		System.out.println("UPDATING!!!!!!");
 		return new ModelAndView("updateClientList");
 	}
 	@RequestMapping(value="updateProductCats.do", method=RequestMethod.GET)
@@ -60,6 +59,8 @@ public class IMSController implements ServletContextAware,
 		MiddleInterfaceF midF = new MiddleInterfaceF();
 		List<ProductBean> aList = midF.getAllProducts();
 		req.setAttribute("products", aList);
+		List<ProductCategoryBean> list = midF.getAllProductCats();
+		req.setAttribute("categories", list);
 		req.setAttribute("updateProduct", new ProductBean());
 		return new ModelAndView("viewProducts");
 	}
@@ -76,20 +77,51 @@ public class IMSController implements ServletContextAware,
 		midF.insertProduct(newProduct);
 		return this.viewProducts(req);
 	}
-	@RequestMapping(value="updateProductInfo.do", method=RequestMethod.POST)
+	@RequestMapping(value="updateProductInfo.do", method=RequestMethod.POST,params="update")
 	public ModelAndView updateProductInfo(@ModelAttribute("updateProduct") @Valid ProductBean updateProduct,
 			BindingResult bindingResult,
 			HttpServletRequest req,
 			HttpServletResponse resp){
 		if(bindingResult.hasErrors()){
-			return new ModelAndView("updateProduct");
+			return this.viewProducts(req);
 		}
 		MiddleInterfaceF midF = new MiddleInterfaceF();
-		midF.insertProduct(updateProduct);
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("index");
-		return mv;
+		midF.updateProduct(updateProduct);
+		return this.viewProducts(req);
 	}
+	@RequestMapping(value="updateProductInfo.do", method=RequestMethod.POST,params="delete")
+	public ModelAndView deleteProduct(ProductBean updateProduct,
+			HttpServletRequest req,
+			HttpServletResponse resp){
+		MiddleInterfaceF midF = new MiddleInterfaceF();
+		List<ProductBean> aList = midF.getAllProducts();
+		for(ProductBean p:aList){
+			if(p.getProductUPC()==updateProduct.getProductUPC()){
+				updateProduct = p;
+				break;
+			}
+		}
+		System.out.println(updateProduct.getClass());
+		midF.delete(updateProduct);
+		return this.viewProducts(req);
+	}
+	//Old version for rollback
+//	@RequestMapping(value="deleteProduct.do", method=RequestMethod.POST)
+//	public ModelAndView deleteProduct(ProductBean updateProduct,
+//			HttpServletRequest req,
+//			HttpServletResponse resp){
+//		MiddleInterfaceF midF = new MiddleInterfaceF();
+//		List<ProductBean> aList = midF.getAllProducts();
+//		for(ProductBean p:aList){
+//			if(p.getProductUPC()==updateProduct.getProductUPC()){
+//				updateProduct = p;
+//				break;
+//			}
+//		}
+//		System.out.println(updateProduct.getClass());
+//		midF.delete(updateProduct);
+//		return this.viewProducts(req);
+//	}
 	@RequestMapping(value="registerProductCat.do", method=RequestMethod.POST)
 	public ModelAndView registerProductCat(@ModelAttribute("newProduct") @Valid ProductCategoryBean newProductCat,
 			BindingResult bindingResult,
@@ -130,6 +162,20 @@ public class IMSController implements ServletContextAware,
 		req.getSession().setAttribute("clientList", clientList);
 		return this.viewClients(req);
 	}
+	@RequestMapping(value="updateClientInfo.do", method=RequestMethod.POST)
+	public ModelAndView updateClientInfo(@ModelAttribute("updateProduct") @Valid ClientBean updateClient,
+			BindingResult bindingResult,
+			HttpServletRequest req,
+			HttpServletResponse resp){
+		if(bindingResult.hasErrors()){
+			return new ModelAndView("updateProduct");
+		}
+		MiddleInterfaceF midF = new MiddleInterfaceF();
+		midF.updateClient(updateClient);
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("index");
+		return mv;
+	}
 	@RequestMapping(value="viewClients.do", method=RequestMethod.GET)
 	public ModelAndView viewClients(HttpServletRequest req){
 		MiddleInterfaceF midF = new MiddleInterfaceF();
@@ -139,6 +185,24 @@ public class IMSController implements ServletContextAware,
 		return new ModelAndView("viewClients");
 	}
 
+	@RequestMapping(value="deleteClient.do", method=RequestMethod.POST)
+	public ModelAndView deleteClient(ClientBean updateClient,
+			HttpServletRequest req,
+			HttpServletResponse resp){
+		MiddleInterfaceF midF = new MiddleInterfaceF();
+		List<ClientBean> aList = midF.getAllClients();
+		for(ClientBean c:aList){
+			if(c.getId()==updateClient.getId()){
+				updateClient = c;
+				break;
+			}
+		}
+		System.out.println(updateClient.getName());
+		System.out.println(updateClient.getAddress().getStreetAddress1());
+		System.out.println("Diving");
+		midF.deleteClient(updateClient);
+		return this.viewClients(req);
+	}
 	@RequestMapping(value="invoices.do", method=RequestMethod.GET)
 	public String getProducts(HttpServletRequest req){
 		MiddleInterfaceF midF = new MiddleInterfaceF();

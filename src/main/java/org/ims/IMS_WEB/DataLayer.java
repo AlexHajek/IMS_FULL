@@ -56,6 +56,19 @@ public class DataLayer {
 		dao.update(obj);
 		tran.commit();
 	}
+	
+	public void delete(Object obj){
+		Transaction tran = session.beginTransaction();
+		dao.delete(obj);
+		tran.commit();
+	}
+	
+	public void deleteClient(ClientBean client){
+		Transaction tran = session.beginTransaction();
+		dao.delete(client.getAddress());
+		tran.commit();
+	}
+	
 	public Session getSession(){
 		return this.session;
 	}

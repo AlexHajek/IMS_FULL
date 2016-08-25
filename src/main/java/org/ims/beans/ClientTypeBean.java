@@ -7,6 +7,9 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
 
 @Entity
 @Table(name="IMS_CLIENT_TYPE")
@@ -22,7 +25,7 @@ public class ClientTypeBean {
 	@NotNull(message = "clientType is required.")
 	@Size(min=0,max=25,message="invalid clientType")
 	private String clientType;
-	
+	@Cascade({CascadeType.SAVE_UPDATE})
 	@OneToMany(mappedBy="clientType")
 	private Set<ClientBean> ClientSet;
 

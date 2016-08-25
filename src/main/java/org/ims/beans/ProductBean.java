@@ -18,6 +18,9 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
 @Entity
 @Table(name="IMS_PRODUCT")
 public class ProductBean {
@@ -48,6 +51,10 @@ public class ProductBean {
 	@NotNull(message="Size is required")
 	@Size(max=10,message="Too Long")
 	private String packSize;
+	@Column(name="ONHAND_QUANTITY",nullable=false)
+	@NotNull(message="On Hand Quantity is required")
+	@Min(value=0,message="Invalid Quantity")
+	private int onHandQuantity;
 	@Column(name="REORDER_QUANTITY",nullable=false)
 	@NotNull(message="Reorder Minimum is required")
 	@Min(value=0,message="Invalid Quantity")
@@ -64,13 +71,13 @@ public class ProductBean {
 	//Controller use only
 	@Transient
 	private String[] categoriesString;
-	
+	@Cascade({CascadeType.SAVE_UPDATE})
 	@ManyToMany
 	@JoinTable(name="PRODUCT_CATEGORIES",
 					joinColumns=@JoinColumn(name="PRODUCT_UPC"),
 					inverseJoinColumns=@JoinColumn(name="CATEGORY_ID"))
 	private Set<ProductCategoryBean> categoriesForProduct;
-
+	@Cascade({CascadeType.SAVE_UPDATE})
 	@OneToMany(mappedBy="product")
 	private Set<POLineBean> linesForProduct;
 
@@ -111,6 +118,12 @@ public class ProductBean {
 	public void setPackSize(String packSize) {
 		this.packSize = packSize;
 	}
+	public int getOnHandQuantity() {
+		return onHandQuantity;
+	}
+	public void setOnHandQuantity(int onHandQuantity) {
+		this.onHandQuantity = onHandQuantity;
+	}
 	public int getReorderQuantity() {
 		return reorderQuantity;
 	}
@@ -141,7 +154,6 @@ public class ProductBean {
 	public void setCategoriesForProduct(Set<ProductCategoryBean> categoriesForProduct) {
 		this.categoriesForProduct = categoriesForProduct;
 	}
-
 	public Set<POLineBean> getLinesForProduct() {
 		return linesForProduct;
 	}
@@ -160,7 +172,7 @@ public class ProductBean {
 		// TODO Auto-generated constructor stub
 	}
 	public ProductBean(int productUPC, String productName, String productDescription, String shortName, double unitCost,
-			String packSize, int reorderQuantity, double retailPrice, double productWeight, Blob productImage,
+			String packSize, int reorderQuantity, int onHandQuantity, double retailPrice, double productWeight, Blob productImage,
 			Set<ProductCategoryBean> categoriesForProduct, Set<POLineBean> linesForProduct) {
 		super();
 		this.productUPC = productUPC;
@@ -169,6 +181,7 @@ public class ProductBean {
 		this.shortName = shortName;
 		this.unitCost = unitCost;
 		this.packSize = packSize;
+		this.onHandQuantity=onHandQuantity;
 		this.reorderQuantity = reorderQuantity;
 		this.retailPrice = retailPrice;
 		this.productWeight = productWeight;

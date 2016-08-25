@@ -6,6 +6,9 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
 @Entity
 @Table(name="IMS_ADDRESS")
 public class AddressBean {
@@ -32,6 +35,7 @@ public class AddressBean {
 	@NotNull(message = "addressZip is required.")
 	@Digits(integer=10, fraction=0, message="invalid zip")
 	private String addressZip;
+	@Cascade({CascadeType.SAVE_UPDATE})
 	@ManyToOne
 	@JoinColumn(name="STATE_ID", nullable=false)
 	@NotNull(message = "stateAbbrv is required.")
