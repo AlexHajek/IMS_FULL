@@ -71,4 +71,11 @@ public class StateAbbrvBean {
 		this.stateAbbrv = stateAbbrv;
 		this.stateAddressSet = stateAddressSet;
 	}
+//	public boolean verify(){
+//		if(this.arrvId>0&&
+//				!this.stateName.isEmpty()&&
+//				!this.stateAbbrv.isEmpty())
+//			return true;
+//		return false;
+//	}
 }

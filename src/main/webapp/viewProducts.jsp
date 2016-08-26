@@ -27,13 +27,17 @@ td{
 .top-border{
 	border-top: 2px solid yellow;
 }
+.scroll{
+	height:100vh;
+	overflow:auto;
+}
 </style>
 </head>
 <body>
 	<div class="fulldiv">
 	 <script src="navbar.js"></script>
    <div class="pagebody">
-   	<div class="pagecenter">
+   	<div class="pagecenter scroll">
    		<table class="fullwidth">
    			<tr>
 					<th>UPC Code/<br/>Description</th>

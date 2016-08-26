@@ -63,4 +63,9 @@ public class ClientTypeBean {
 		this.clientType = clientType;
 		ClientSet = clientSet;
 	}
+//	public boolean verify(){
+//		if(!this.clientType.isEmpty())
+//			return true;
+//		return false;
+//	}
 }

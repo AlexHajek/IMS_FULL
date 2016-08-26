@@ -28,7 +28,7 @@
 					<table class="fullwidth">
 						<tr>
 							<td>
-								Name:<br/> <form:input path="name" class="mylabels"/> <br/>
+								Name:<br/> <form:input path="name" class="mylabels" /> <br/>
 								<form:errors path="name" cssClass="error" /><br/>
 							</td>
 						</tr>
@@ -83,14 +83,11 @@
 					</table>
 					<table class="fullwidth">
 					<tr>
-						
-							StateName:<br/> <form:select path="address.stateAbbrv.arrvId">
+					StateName:<br/> <form:select path="address.stateAbbrv.arrvId">
 										<form:options items="${myAbbrvs}" itemValue="arrvId" itemLabel="stateName"/>
 									</form:select> <br/>
 							<form:errors path="address.stateAbbrv.arrvId" cssClass="error" />
-						
-						
-							ClientType:<br/> <form:select path="clientType.clientTypeId">
+					ClientType:<br/> <form:select path="clientType.clientTypeId">
 										<form:options items="${clientTypes}" itemValue="clientTypeId" itemLabel="clientType"/>
 									</form:select><br/>
 							<form:errors path="clientType.clientTypeId" cssClass="error" />

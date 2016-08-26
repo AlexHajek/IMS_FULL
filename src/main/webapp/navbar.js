@@ -12,8 +12,7 @@ document.write('\
 	  <li><a href="viewProducts.do">View Products</a></li>\
 	  <li><a href="invoices.do">Generate Invoices</a></li>\
 	  <li><a href="reports.do">Generate Reports</a></li>\
-	  <li><a href="faq.jsp">FAQ</a></li>\
-	  <li><a href="about.jsp">About</a></li>\
+	  <li><a href="faq.do">FAQ</a></li>\
 	</ul>\
 </div>\
 ');
