@@ -11,6 +11,8 @@ import javax.validation.constraints.Size;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
+//import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name="IMS_CLIENT")
 public class ClientBean {
@@ -49,6 +51,7 @@ public class ClientBean {
 	@Cascade({CascadeType.SAVE_UPDATE})
 	@ManyToOne
 	@JoinColumn(name="CLIENT_TYPE_ID", nullable=false)
+	//@JsonManagedReference
 	private ClientTypeBean clientType;
 	public int getId() {
 		return id;

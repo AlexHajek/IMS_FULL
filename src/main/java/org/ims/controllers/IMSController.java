@@ -207,12 +207,21 @@ public class IMSController implements ServletContextAware,
 	public String getProducts(HttpServletRequest req){
 		MiddleInterfaceF midF = new MiddleInterfaceF();
 		List<ProductBean> aList = midF.getAllProducts();
+		List<ClientBean> cList = midF.getAllClients();
 		List<String> nameList = new ArrayList<String>();
+		List<String> clientNames = new ArrayList<String>();
 		nameList.add("--");
+		clientNames.add("--");
 		for(ProductBean a: aList){
 			nameList.add(a.getShortName());
 		}
+		for(ClientBean c: cList){
+			clientNames.add(c.getName());
+		}
+		//generate list of products and clients
 		req.setAttribute("products", nameList);
+		req.setAttribute("clients", clientNames);
+		
 		return "invoices";
 	}
 //	@RequestMapping(value="invoices.do", method=RequestMethod.GET)

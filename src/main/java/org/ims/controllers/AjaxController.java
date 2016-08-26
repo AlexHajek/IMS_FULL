@@ -56,21 +56,39 @@ public class AjaxController {
 	@RequestMapping(method=RequestMethod.GET, value="getClient.do", produces="application/json")
 	@ResponseBody	//write return value directly to HTTP response in the specified content-type (produces=content-type)
 	public List<ClientBean> getClient(@RequestParam (value="a") String a){
+		//ClientBean bean = new ClientBean();
 		MiddleInterfaceF mid = new MiddleInterfaceF();
 		if(a.equals("--")){
 			return client;
 		}
-		if(products.isEmpty() == false){
+		if(client.isEmpty() == false){
 			client.clear();
 		}
 		//if user selects the empty option
 	
 		ClientBean bean = mid.getClientByName(a);
+		/*
+		List<ClientBean> myList = mid.getAllClients();
+		for(ClientBean c : myList){
+			if(c.getName().equals(a)){
+				bean = c;
+			}
+		}
+		*/
+		System.out.println("INTO GETCLIENT.DO METHOD IN AJAXCONTROLLER");
 		//System.out.println("String inserted to method is: "+a);
 		//System.out.println("getProduct.do executed!");
 		//System.out.println("Product Return Description: "+bean.getProductDescription());
+		System.out.println("type is: "+bean.getEmail());
+		System.out.println("type is: "+bean.getPhone());
+		if(bean.getClientType().getClientTypeId() == 1){
+			bean.getClientType().setClientType("Supplier");
+		}
+		else{
+			bean.getClientType().setClientType("Retailer");
+		}
 		client.add(bean);
-		
+		//System.out.println("Client Type: "+bean.getClientType().getClientType());
 		return client;
 	}
 	
