@@ -6,53 +6,50 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<script src="https://code.jquery.com/jquery-1.12.3.js" type="text/javascript" ></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/data.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
 <link rel="stylesheet" href="./style.css">
+<style type="text/css">
+.scroll{
+	height:100vh;
+	overflow:auto;
+}
+</style>
 </head>
 <body>
 	<div class="fulldiv">
    <script src="navbar.js"></script>
    <script src="highcharts.js"></script>
    <div class="pagebody">
-   	<div class="pagecenter">
-			<div id="container"></div>
-			<table id="datatable">
-    <thead>
-        <tr>
-            <th></th>
-            <th>Jane</th>
-            <th>John</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <th>Apples</th>
-            <td>3</td>
-            <td>4</td>
-        </tr>
-        <tr>
-            <th>Pears</th>
-            <td>2</td>
-            <td>0</td>
-        </tr>
-        <tr>
-            <th>Plums</th>
-            <td>5</td>
-            <td>11</td>
-        </tr>
-        <tr>
-            <th>Bananas</th>
-            <td>1</td>
-            <td>1</td>
-        </tr>
-        <tr>
-            <th>Oranges</th>
-            <td>2</td>
-            <td>4</td>
-        </tr>
-    </tbody>
-</table>
+   	<div class="pagecenter scroll">
+			<div id="container" style="width:100%; height:400px;"></div>
+			<table id="datatable" style="visibility: visible;">
+		    <thead>
+		        <tr><th></th><th>On Hand</th><th>Purchased</th><th>Sold</th></tr>
+		    </thead>
+		    <tbody>
+		    	<c:forEach var="t" items="${products}">
+		    		<tr><th><c:out value="${t.productName}"></c:out></th>
+		    		<td><c:out value="${t.onHandQuantity}"></c:out></td><td>3</td><td>4</td></tr>
+		    	</c:forEach>
+<!-- 		        <tr><th>Apples</th><td>20</td><td>3</td><td>4</td></tr> -->
+<!-- 		        <tr><th>Pears</th><td>25</td><td>2</td><td>0</td></tr> -->
+<!-- 		        <tr><th>Plums</th><td>30</td><td>5</td><td>11</td></tr> -->
+<!-- 		        <tr><th>Bananas</th><td>18</td><td>1</td><td>1</td></tr> -->
+<!-- 		        <tr><th>Oranges</th><td>12</td><td>2</td><td>4</td></tr> -->
+<!-- 		        <tr><th>Grapes</th><td>50</td><td>2</td><td>4</td></tr> -->
+<!-- 		        <tr><th>a</th><td>50</td><td>2</td><td>4</td></tr> -->
+<!-- 		        <tr><th>s</th><td>50</td><td>2</td><td>4</td></tr> -->
+<!-- 		        <tr><th>d</th><td>50</td><td>2</td><td>4</td></tr> -->
+<!-- 		        <tr><th>f</th><td>50</td><td>2</td><td>4</td></tr> -->
+<!-- 		        <tr><th>g</th><td>50</td><td>2</td><td>4</td></tr> -->
+<!-- 		        <tr><th>h</th><td>50</td><td>2</td><td>4</td></tr> -->
+		    </tbody>
+			</table>
 			<br/>
 		</div>
    </div>
@@ -61,26 +58,29 @@
 </body>
 <script type="text/javascript">
 $(function () {
-    // create the chart
-    var chart = new Highcharts.Chart({
+    $('#container').highcharts({
+        data: {
+            table: 'datatable'
+        },
         chart: {
-            renderTo: 'container',
-            events: {
-                load: function(event) {
-                    alert ('Chart loaded');
-                }
-            }        
+            type: 'column'
         },
-        xAxis: {
+        title: {
+            text: 'Filler data until Reports finalize'
         },
-        
-        series: [{
-            animation: false,
-            data: [29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]     
-        }]
+        yAxis: {
+            allowDecimals: false,
+            title: {
+                text: 'Units'
+            }
+        },
+        tooltip: {
+            formatter: function () {
+                return '<b>' + this.series.name + '</b><br/>' +
+                    this.point.y + ' ' + this.point.name.toLowerCase();
+            }
+        }
     });
-    
-    chart.title = "hello";
 });
 </script>
 </html>

@@ -218,6 +218,9 @@ public class IMSController implements ServletContextAware,
 	}
 	@RequestMapping(value="reports.do", method=RequestMethod.GET)
 	public ModelAndView reports(HttpServletRequest req){
+		MiddleInterfaceF midF = new MiddleInterfaceF();
+		List<ProductBean> aList = midF.getAllProducts();
+		req.setAttribute("products", aList);
 		return new ModelAndView("generateReports");
 	}
 	@RequestMapping(value="faq.do", method=RequestMethod.GET)
