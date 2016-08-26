@@ -147,8 +147,8 @@ public class MiddleInterfaceF {
 	    Transport.send(msg);
   	} catch (MessagingException mex) {
 	    mex.printStackTrace();
-    }
-	}
+	    }
+  }
 	@Override
 	protected void finalize() throws Throwable {
 		dLayer.close();
