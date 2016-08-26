@@ -65,11 +65,11 @@ public class AjaxController {
 		}
 		//if user selects the empty option
 	
-		ClientBean bean = mid.getClientByName(a);
+		//ClientBean bean = mid.getClientByName(a);
 		//System.out.println("String inserted to method is: "+a);
 		//System.out.println("getProduct.do executed!");
 		//System.out.println("Product Return Description: "+bean.getProductDescription());
-		client.add(bean);
+		//client.add(bean);
 		
 		return client;
 	}
