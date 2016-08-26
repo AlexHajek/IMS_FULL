@@ -2,7 +2,13 @@ package org.ims.beans;
 
 import java.util.Set;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -10,6 +16,7 @@ import javax.validation.constraints.Size;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
+//import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name="IMS_STATE_ABBRV")
@@ -34,7 +41,8 @@ public class StateAbbrvBean {
 	
 	@Cascade({CascadeType.SAVE_UPDATE})
 	@OneToMany(mappedBy="stateAbbrv")
-	private Set<AddressBean> stateAddressSet;
+	//@JsonBackReference
+	transient private Set<AddressBean> stateAddressSet;
 	
 	public int getArrvId() {
 		return arrvId;

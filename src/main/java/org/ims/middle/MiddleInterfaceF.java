@@ -112,7 +112,7 @@ public class MiddleInterfaceF {
 	public ClientBean getClientByName(String myname){
 		Session session = dLayer.getSession();
 		Criteria criteria = session.createCriteria(ClientBean.class)
-				.add(Restrictions.eq("clientName", myname));
+				.add(Restrictions.eq("name", myname));
 		ClientBean myBean = (ClientBean)criteria.uniqueResult();
 		return myBean;
 	}

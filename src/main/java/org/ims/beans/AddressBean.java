@@ -9,6 +9,8 @@ import javax.validation.constraints.Size;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
+//import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name="IMS_ADDRESS")
 public class AddressBean {
@@ -40,6 +42,7 @@ public class AddressBean {
 	@JoinColumn(name="STATE_ID", nullable=false)
 	@NotNull(message = "stateAbbrv is required.")
 	@Size(min=2,max=2,message="invalid state abbrv")
+	//@JsonManagedReference
 	private StateAbbrvBean stateAbbrv;
 	
 	public int getAddressId() {

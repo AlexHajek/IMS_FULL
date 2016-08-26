@@ -2,13 +2,21 @@ package org.ims.beans;
 
 import java.util.Set;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
+
+//import com.fasterxml.jackson.annotation.JsonBackReference;
 
 
 @Entity
@@ -27,7 +35,8 @@ public class ClientTypeBean {
 	private String clientType;
 	@Cascade({CascadeType.SAVE_UPDATE})
 	@OneToMany(mappedBy="clientType")
-	private Set<ClientBean> ClientSet;
+	//@JsonBackReference
+	transient private Set<ClientBean> clientSet;
 
 	public int getClientTypeId() {
 		return clientTypeId;
@@ -46,11 +55,11 @@ public class ClientTypeBean {
 	}
 
 	public Set<ClientBean> getClientSet() {
-		return ClientSet;
+		return clientSet;
 	}
 
 	public void setClientSet(Set<ClientBean> clientSet) {
-		ClientSet = clientSet;
+		this.clientSet = clientSet;
 	}
 
 	public ClientTypeBean() {
@@ -61,6 +70,6 @@ public class ClientTypeBean {
 		super();
 		this.clientTypeId = clientTypeId;
 		this.clientType = clientType;
-		ClientSet = clientSet;
+		this.clientSet = clientSet;
 	}
 }
