@@ -65,7 +65,7 @@ public class AjaxController {
 			client.clear();
 		}
 		//if user selects the empty option
-	
+
 		ClientBean bean = mid.getClientByName(a);
 		/*
 		List<ClientBean> myList = mid.getAllClients();

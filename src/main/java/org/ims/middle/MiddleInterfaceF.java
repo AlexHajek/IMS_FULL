@@ -1,13 +1,21 @@
 package org.ims.middle;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-import java.util.Set;
+import java.util.Properties;
+
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 import org.ims.IMS_WEB.DataLayer;
+import org.ims.beans.AddressBean;
 import org.ims.beans.ClientBean;
 import org.ims.beans.ClientTypeBean;
 import org.ims.beans.ProductBean;
@@ -57,8 +65,10 @@ public class MiddleInterfaceF {
 		dLayer.update(product);
 		return true;
 	}
+	//,AddressBean client_old
+	//,client_old
 	public boolean updateClient(ClientBean client){
-		dLayer.update(client);
+		dLayer.updateClient(client);
 		return true;
 	}
 	public boolean delete(Object obj){
@@ -116,6 +126,36 @@ public class MiddleInterfaceF {
 		ClientBean myBean = (ClientBean)criteria.uniqueResult();
 		return myBean;
 	}
+	//Test location for emailing
+	public void email(String str){
+		// Recipient's email ID needs to be mentioned.
+    String to = "alexanderjhajek@gmail.com";
+    // Sender's email ID needs to be mentioned
+    String from = "ims@revature.com";
+    // Assuming you are sending email from localhost
+    String host = "localhost";
+    // create some properties and get the default Session
+  	Properties props = new Properties();
+  	props.put("mail.smtp.host", host);
+    // Get the default Session object.
+  	javax.mail.Session session = javax.mail.Session.getInstance(props, null);
+  	try {
+	    // create a message
+	    MimeMessage msg = new MimeMessage(session);
+	    msg.setFrom(new InternetAddress(from));
+	    InternetAddress[] address = {new InternetAddress(to)};
+	    msg.setRecipients(Message.RecipientType.TO, address);
+	    msg.setSubject("JavaMail APIs Test");
+	    msg.setSentDate(new Date());
+	    // If the desired charset is known, you can use
+	    // setText(text, charset)
+	    msg.setText(str+"This is an un");
+	    System.out.println("About to transport");
+	    Transport.send(msg);
+  	} catch (MessagingException mex) {
+	    mex.printStackTrace();
+	    }
+  }
 	@Override
 	protected void finalize() throws Throwable {
 		dLayer.close();

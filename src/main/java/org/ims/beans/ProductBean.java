@@ -1,6 +1,8 @@
 package org.ims.beans;
 
 import java.sql.Blob;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -188,5 +190,27 @@ public class ProductBean {
 		this.productImage = productImage;
 		this.categoriesForProduct = categoriesForProduct;
 		this.linesForProduct = linesForProduct;
+	}
+	public boolean verify(){
+//		System.out.println(this.productUPC+":"+this.productName+":"+this.productDescription+":"+this.shortName+":"
+//				+this.unitCost+":"+this.packSize+":"+this.productWeight+":"+this.reorderQuantity+":"+this.retailPrice);
+		if(!this.productName.isEmpty()&&!this.productDescription.isEmpty()&&!this.shortName.isEmpty()
+				&&this.unitCost>0.0&&!this.packSize.isEmpty()&&this.productWeight>0.0&&this.reorderQuantity>0
+				&&this.retailPrice>0.0)
+			return true;
+		return false;
+	}
+	public Set<ProductCategoryBean> link(ProductBean product,List<ProductCategoryBean> categories){
+		if(product.getCategoriesString().length==0)
+			return null;
+		Set<ProductCategoryBean> set = new HashSet<>();
+		for(String s:product.getCategoriesString()){
+			for(int i=0;i<categories.size();i++){
+				if(s.equals(categories.get(i).getCategoryDescription())){
+					set.add(categories.get(i));
+				}
+			}
+		}
+		return set;
 	}
 }
