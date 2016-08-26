@@ -1,6 +1,6 @@
 var count = 0;
 var clientSelected = false;
-
+var taxRate = 5.0;
 function fillRow(){ 
 		$.ajax({
 			header: {
@@ -12,7 +12,7 @@ function fillRow(){
 				//$("#mytable").html("<tr><td>ProductShort</td><td>ProductName</td><td>Unit Price</td><td>Amount</td><td>Total Cost</td></tr>");
 				$.each(resp, function(i, item){
 	 				$("#mytable").append(
-						"<tr><td><input id="+item.shortName+" value="+ item.shortName+" readonly>"+
+						"<tr class='top-border'><td><input id="+item.shortName+" value="+ item.shortName+" readonly>"+
 						"</input></td><td><input id=productName"+count+" value="+item.productName+" readonly>"+
 						"</input></td><td><input id=unitCost"+count+" value="+item.unitCost+" readonly>"+
 						"</input></td><td>"+
@@ -34,9 +34,16 @@ $("#mytable").on('change','.amount', function(){
     //alert($("#total"+(test.attr('id'))).val(total));
     $("#total"+(test.attr('id'))).val(total);
     for(i = 1; i<($('#mytable tr').length-1); i++){
-    	grandtotal += parseFloat($("#total"+i).val());
+    	if(parseFloat($("#total"+i).val()))
+    	{
+    		grandtotal += parseFloat($("#total"+i).val());
+    	}
     }
-    $("#grandTotal").val(grandtotal);
+    $("#subtotal").val(grandtotal);
+    var taxratedecimal = parseFloat($("#taxRate").val())/100;
+    var grandertotal = (taxratedecimal*grandtotal)+grandtotal;
+    grandertotal = roundToTwo(grandertotal);
+    $("#grandTotal").val(grandertotal);
     
 });
 /*
@@ -83,6 +90,7 @@ function getSum(){
 };
 
 function setClient(){
+	var grandtotal2 = 0;
 	$.ajax({
 		header: {
 			Accept : "application/json; charset=utf-8"
@@ -98,9 +106,9 @@ function setClient(){
  				$("#mytable2").append(
  						'<tr id="myrow"><td><input id="clientName" value='+item.name+' readonly></input></td>'+
  						'<td><input id="clientType" value='+item.clientType.clientType+' readonly></input></td>'+
- 						'<td><input readonly></input></td>'+
- 						'<td><input readonly></input></td>'+
- 						'<td><input id = "grandTotal" readonly></input></td></tr>'
+ 						'<td><input id="taxRate" value='+taxRate+'></input></td>'+
+ 						'<td><input id="subtotal" readonly></input></td>'+
+ 						'<td><input id="grandTotal" readonly></input></td></tr>'
 //					'<tr><td><select name="myList" id="myList">'+
 //				'<c:forEach items="${products}" var="myProduct">'+
 //					'<option value="${myProduct}">'+
@@ -111,6 +119,15 @@ function setClient(){
  						
  				);
  			})
+ 			for(i = 1; i<($('#mytable tr').length-1); i++){
+ 				grandtotal2 += parseFloat($("#total"+i).val());
+ 			}
+ 			
+ 			$("#subtotal").val(grandtotal2);
+ 			var taxratedecimal = parseFloat($("#taxRate").val())/100;
+ 		    var grandertotal = (taxratedecimal*grandtotal2)+grandtotal2;
+ 		    grandertotal = roundToTwo(grandertotal);
+ 		    $("#grandTotal").val(grandertotal);
  			clientSelected = true;
 			}
 			else{
@@ -121,6 +138,7 @@ function setClient(){
 		}
 	});
 }
+/*
 $("#mytable2").on('change','#myClients', function(){
 	var grandtotal2 = 0;
 	for(i = 1; i<($('#mytable tr').length-1); i++){
@@ -128,7 +146,7 @@ $("#mytable2").on('change','#myClients', function(){
 	}
 	$("#grandTotal").val(grandtotal2);
 });
-
+*/
 function genReport(){
 	if(clientSelected == true){
 		/*
@@ -146,6 +164,9 @@ function genReport(){
 			}
 		})
 	}
+}
+function roundToTwo(num) {    
+    return +(Math.round(num + "e+2")  + "e-2");
 }
 //	$.ajax({
 //		header: {

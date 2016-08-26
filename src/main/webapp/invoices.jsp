@@ -12,6 +12,9 @@
 	#chart{
 		height: 500px;
 	}
+	.top-border{
+		border-top: 2px solid yellow;
+	}
 </style>
 </head>
 <body>
@@ -23,7 +26,7 @@
    	<div class="pagecenter" id="chart">
    	 <h1>Generate Invoices</h1>
 	<table id="mytable" class="table fullwidth">
-		<tr>
+		<tr class="top-border">
 			<td>ProductShort</td><td>ProductName</td><td>Unit Price</td><td>Amount</td><td>Total Cost</td>
 		</tr>
 		<tr>
@@ -55,8 +58,8 @@
 	<br/>
 	<div class="pagecenter">
 	<table id="mytable2" class="table fullwidth">
-		<tr>
-			<td>Client</td><td>Client Type</td><td>------</td><td>------</td><td>Grand Total</td>
+		<tr class="top-border">
+			<td>Client</td><td>Client Type</td><td>Tax Rate (%)</td><td>Subtotal($)</td><td>Grand Total($)</td>
 		</tr>
 		<tr>
 			<td>
@@ -85,9 +88,9 @@
 	</table>
 	</div>
 	<br/>
-	<!-- 
+	 
 	<button type="button" id="invoiceBtn">Generate Invoice</button>
-	-->
+	
 </body>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
