@@ -72,8 +72,13 @@ public class IMSController implements ServletContextAware,
 		if(bindingResult.hasErrors()){
 			return this.updateProduct(req);
 		}
+		if(!newProduct.verify()){
+			System.out.println("err in verification");
+			return this.updateProduct(req);
+		}
 		MiddleInterfaceF midF = new MiddleInterfaceF();
-		
+		List<ProductCategoryBean> list = midF.getAllProductCats();
+		newProduct.setCategoriesForProduct(newProduct.link(newProduct, list));
 		midF.insertProduct(newProduct);
 		return this.viewProducts(req);
 	}
@@ -83,6 +88,9 @@ public class IMSController implements ServletContextAware,
 			HttpServletRequest req,
 			HttpServletResponse resp){
 		if(bindingResult.hasErrors()){
+			return this.viewProducts(req);
+		}
+		if(!updateProduct.verify()){
 			return this.viewProducts(req);
 		}
 		MiddleInterfaceF midF = new MiddleInterfaceF();
@@ -105,23 +113,6 @@ public class IMSController implements ServletContextAware,
 		midF.delete(updateProduct);
 		return this.viewProducts(req);
 	}
-	//Old version for rollback
-//	@RequestMapping(value="deleteProduct.do", method=RequestMethod.POST)
-//	public ModelAndView deleteProduct(ProductBean updateProduct,
-//			HttpServletRequest req,
-//			HttpServletResponse resp){
-//		MiddleInterfaceF midF = new MiddleInterfaceF();
-//		List<ProductBean> aList = midF.getAllProducts();
-//		for(ProductBean p:aList){
-//			if(p.getProductUPC()==updateProduct.getProductUPC()){
-//				updateProduct = p;
-//				break;
-//			}
-//		}
-//		System.out.println(updateProduct.getClass());
-//		midF.delete(updateProduct);
-//		return this.viewProducts(req);
-//	}
 	@RequestMapping(value="registerProductCat.do", method=RequestMethod.POST)
 	public ModelAndView registerProductCat(@ModelAttribute("newProduct") @Valid ProductCategoryBean newProductCat,
 			BindingResult bindingResult,
@@ -133,7 +124,7 @@ public class IMSController implements ServletContextAware,
 		MiddleInterfaceF midF = new MiddleInterfaceF();
 		midF.insertProductCat(newProductCat);
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("index");
+		mv.setViewName("home");
 		return mv;
 	}
 	@RequestMapping(value="updateclient.do", method=RequestMethod.POST)
@@ -145,6 +136,9 @@ public class IMSController implements ServletContextAware,
 			){
 		if(bindingResult.hasErrors()){
 			System.out.println("bindingResult failed!");
+			return this.updateClientList(req);
+		}
+		if(!myClient.verify()){
 			return this.updateClientList(req);
 		}
 		@SuppressWarnings("unchecked")
@@ -162,29 +156,32 @@ public class IMSController implements ServletContextAware,
 		req.getSession().setAttribute("clientList", clientList);
 		return this.viewClients(req);
 	}
-	@RequestMapping(value="updateClientInfo.do", method=RequestMethod.POST)
-	public ModelAndView updateClientInfo(@ModelAttribute("updateProduct") @Valid ClientBean updateClient,
+	@RequestMapping(value="updateClientInfo.do", method=RequestMethod.POST,params="update")
+	public ModelAndView updateClientInfo(@ModelAttribute("updateClient") @Valid ClientBean updateClient,
 			BindingResult bindingResult,
 			HttpServletRequest req,
 			HttpServletResponse resp){
 		if(bindingResult.hasErrors()){
-			return new ModelAndView("updateProduct");
+			return this.viewClients(req);
+		}
+		if(!updateClient.verify()){
+			return this.viewClients(req);
 		}
 		MiddleInterfaceF midF = new MiddleInterfaceF();
-		midF.updateClient(updateClient);
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("index");
-		return mv;
-	}
-	@RequestMapping(value="viewClients.do", method=RequestMethod.GET)
-	public ModelAndView viewClients(HttpServletRequest req){
-		MiddleInterfaceF midF = new MiddleInterfaceF();
+		//Need to have old state abbrv?
+		ClientBean client_old = new ClientBean();
 		List<ClientBean> aList = midF.getAllClients();
-		req.setAttribute("clients", aList);
-		req.setAttribute("updateClient", new ClientBean());
-		return new ModelAndView("viewClients");
+		for(ClientBean c:aList){
+			if(c.getId()==updateClient.getId()){
+				client_old = c;
+				break;
+			}
+		}
+		//,client_old.getAddress()
+		midF.updateClient(updateClient);
+		return this.viewClients(req);
 	}
-	@RequestMapping(value="deleteClient.do", method=RequestMethod.POST)
+	@RequestMapping(value="updateClientInfo.do", method=RequestMethod.POST,params="delete")
 	public ModelAndView deleteClient(ClientBean updateClient,
 			HttpServletRequest req,
 			HttpServletResponse resp){
@@ -196,11 +193,16 @@ public class IMSController implements ServletContextAware,
 				break;
 			}
 		}
-		System.out.println(updateClient.getName());
-		System.out.println(updateClient.getAddress().getStreetAddress1());
-		System.out.println("Diving");
 		midF.deleteClient(updateClient);
 		return this.viewClients(req);
+	}
+	@RequestMapping(value="viewClients.do", method=RequestMethod.GET)
+	public ModelAndView viewClients(HttpServletRequest req){
+		MiddleInterfaceF midF = new MiddleInterfaceF();
+		List<ClientBean> aList = midF.getAllClients();
+		req.setAttribute("clients", aList);
+		req.setAttribute("updateClient", new ClientBean());
+		return new ModelAndView("viewClients");
 	}
 	@RequestMapping(value="ajaxtest.do", method=RequestMethod.GET)
 	public String getProducts(HttpServletRequest req){
@@ -212,6 +214,22 @@ public class IMSController implements ServletContextAware,
 		}
 		req.setAttribute("products", nameList);
 		return "ajaxtest";
+	}
+	@RequestMapping(value="reports.do", method=RequestMethod.GET)
+	public ModelAndView reports(HttpServletRequest req){
+		return new ModelAndView("generateReports");
+	}
+	@RequestMapping(value="faq.do", method=RequestMethod.GET)
+	public ModelAndView faq(HttpServletRequest req){
+		//Temporarily StateAbbrvBean until I can figure out a better method
+		req.setAttribute("email", new StateAbbrvBean());
+		return new ModelAndView("faq");
+	}
+	@RequestMapping(value="email.do", method=RequestMethod.GET)
+	public ModelAndView email(StateAbbrvBean email,HttpServletRequest req){
+		MiddleInterfaceF midF = new MiddleInterfaceF();
+		midF.email(email.getStateName());
+		return new ModelAndView("home");
 	}
 	@Override
 	public void afterPropertiesSet() throws Exception {

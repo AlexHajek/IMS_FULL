@@ -91,5 +91,11 @@ public class AddressBean {
 		this.addressCity = addressCity;
 		this.addressZip = addressZip;
 		this.stateAbbrv = stateAbbrv;
-	}	
+	}
+	public boolean verify(){
+		if(!this.streetAddress1.isEmpty()&&!this.streetAddress2.isEmpty()
+				&&!this.addressCity.isEmpty()&&!this.addressZip.isEmpty())//&&this.stateAbbrv.verify())
+			return true;
+		return false;
+	}
 }

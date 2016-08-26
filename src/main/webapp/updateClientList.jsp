@@ -28,7 +28,7 @@
 					<table class="fullwidth">
 						<tr>
 							<td>
-								Name:<br/> <form:input path="name" class="mylabels"/> <br/>
+								Name:<br/> <form:input path="name" class="mylabels" /> <br/>
 								<form:errors path="name" cssClass="error" /><br/>
 							</td>
 						</tr>

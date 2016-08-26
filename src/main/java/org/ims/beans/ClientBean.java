@@ -115,4 +115,10 @@ public class ClientBean {
 		this.address = address;
 		this.clientType = clientType;
 	}
+	public boolean verify(){
+		if(!this.name.isEmpty()&&!this.email.isEmpty()&&!this.pocn.isEmpty()
+				&&!this.phone.isEmpty()&&!this.fax.isEmpty()&&this.address.verify())//&&this.clientType.verify())
+			return true;
+		return false;
+	}
 }

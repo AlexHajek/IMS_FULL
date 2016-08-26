@@ -7,6 +7,15 @@
 		<property name="hibernate.connection.driver_class">
 			oracle.jdbc.OracleDriver
 		</property>
+<!-- 		<property name="hibernate.connection.url"> -->
+<!-- 			jdbc:oracle:thin:@orcl.cbclbagfqbs4.us-west-2.rds.amazonaws.com:1521:orcl -->
+<!-- 		</property> -->
+<!-- 		<property name="hibernate.connection.username"> -->
+<!-- 			alex -->
+<!-- 		</property> -->
+<!-- 		<property name="hibernate.connection.password"> -->
+<!-- 			password -->
+<!-- 		</property> -->
 		<property name="hibernate.connection.url">
 			jdbc:oracle:thin:@localhost:1521:xe
 		</property>

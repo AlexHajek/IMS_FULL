@@ -15,10 +15,8 @@
    <script src="navbar.js"></script>
    <div class="pagebody">
    	<div class="pagecenter">
-			<h2>Temporary Home</h2>
-			<a href="updateClientList.do">Client Update</a><br/>
-			<a href="updateProduct.do">Product Update</a><br/>
-			<button class="grad">Test</button>
+			<h2>Welcome to the IMS System</h2>
+			To interact with the system use the tabs on the left to go to pages for specific features
 			<br/>
 		</div>
    </div>
